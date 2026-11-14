@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { Badge } from '@/components/ui/Badge';
 
 type SectionHeaderProps = {
   kicker: string;
@@ -12,9 +11,9 @@ export function SectionHeader({ kicker, title, trailing, className = '' }: Secti
   return (
     <div className={`flex items-baseline justify-between ${className}`}>
       <div>
-        <Badge variant="surface" className="bg-transparent px-0 py-0 uppercase tracking-wider">
+        <span className="font-label-sm text-label-sm uppercase tracking-wider text-secondary">
           {kicker}
-        </Badge>
+        </span>
         <h3 className="font-headline-sm text-headline-sm text-primary">{title}</h3>
       </div>
       {trailing && (

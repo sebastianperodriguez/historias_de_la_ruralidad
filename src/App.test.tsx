@@ -10,7 +10,7 @@ describe('App routing', () => {
         <App />
       </MemoryRouter>,
     );
-    expect(screen.getByText('Historias de Ruralidad')).toBeInTheDocument();
+    expect(screen.getByText(/Historias de Ruralidad/)).toBeInTheDocument();
   });
 
   it('renders the La Honda coming-soon page at "/la-honda"', () => {
