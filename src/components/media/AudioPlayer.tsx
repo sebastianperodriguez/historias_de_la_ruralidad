@@ -15,6 +15,8 @@ type AudioPlayerProps = {
   src?: string;
   transcript?: string;
   avatarInitials?: string;
+  /** Ícono de Material Symbols para el círculo de avatar (alternativa a las iniciales). */
+  avatarIcon?: string;
 };
 
 export function AudioPlayer({
@@ -23,6 +25,7 @@ export function AudioPlayer({
   src,
   transcript,
   avatarInitials,
+  avatarIcon,
 }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -75,6 +78,10 @@ export function AudioPlayer({
         {avatarInitials ? (
           <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-secondary text-on-secondary font-headline-sm text-headline-sm">
             {avatarInitials}
+          </div>
+        ) : avatarIcon ? (
+          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-secondary-fixed text-on-secondary-fixed">
+            <Icon name={avatarIcon} size={20} />
           </div>
         ) : null}
         <div className="flex min-w-0 flex-col">
