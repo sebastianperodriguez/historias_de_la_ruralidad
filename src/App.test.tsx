@@ -28,6 +28,12 @@ describe('App routing', () => {
     expect(screen.getByText('Primeros gestos al habitar lo rural')).toBeInTheDocument();
   });
 
+  it('renders the contact page at "/contacto"', () => {
+    renderAt('/contacto');
+    expect(screen.getAllByText('Contacto').length).toBeGreaterThan(0);
+    expect(screen.getByText('Daniela Zuluaga Toro')).toBeInTheDocument();
+  });
+
   it('renders the not-found page for unknown routes', () => {
     renderAt('/no-existe');
     expect(screen.getByText('Página no encontrada')).toBeInTheDocument();

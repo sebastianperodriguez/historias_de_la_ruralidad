@@ -1,15 +1,10 @@
 import { Link } from 'react-router-dom';
-import { contacto } from '@/data/contacto';
 import { proyecto } from '@/data/proyecto';
 import { Badge } from '@/components/ui/Badge';
 import { FooterEditorial } from '@/components/ui/FooterEditorial';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { Toast } from '@/components/ui/Toast';
-import { useToast } from '@/hooks/useToast';
 
 export function HomePage() {
-  const { toast, showToast } = useToast();
-
   return (
     <>
       {/* Portada del proyecto */}
@@ -93,15 +88,14 @@ export function HomePage() {
             </p>
           </div>
           <div className="flex flex-col gap-space-sm pt-space-xs sm:flex-row sm:justify-center">
-            <button
-              type="button"
-              onClick={() => showToast(proyecto.cta.contributeMessage)}
+            <a
+              href={proyecto.cta.contributeHref}
               className="flex h-12 w-full items-center justify-center rounded-full bg-surface px-6 font-label-md text-label-md font-semibold text-primary shadow transition-transform active:scale-95 sm:w-auto sm:min-w-56"
             >
               <span>{proyecto.cta.contributeLabel}</span>
-            </button>
+            </a>
             <Link
-              to="/#contacto"
+              to={proyecto.cta.contactHref}
               className="flex h-12 w-full items-center justify-center rounded-full border border-on-primary/40 px-6 font-label-md text-label-md text-on-primary transition-colors hover:bg-on-primary/10 sm:w-auto sm:min-w-56"
             >
               <span>{proyecto.cta.contactLabel}</span>
@@ -110,59 +104,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Contacto */}
-      <section id="contacto" className="scroll-mt-24 px-margin pb-space-xl">
-        <div className="flex flex-col gap-space-md rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
-          <div className="flex flex-col gap-1">
-            <span className="font-label-sm text-label-sm font-semibold uppercase tracking-widest text-primary">
-              {contacto.kicker}
-            </span>
-            <h3 className="font-headline-sm text-headline-sm text-on-surface">{contacto.title}</h3>
-            <p className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
-              {contacto.description}
-            </p>
-          </div>
-          <div className="grid gap-space-sm sm:grid-cols-2">
-            {contacto.personas.map((persona) => (
-              <div
-                key={persona.nombre}
-                className="flex flex-col gap-space-sm rounded-xl bg-surface-container-low p-space-md"
-              >
-                <div className="flex flex-col gap-0.5">
-                  <span className="font-label-md text-label-md font-semibold text-on-surface">
-                    {persona.nombre}
-                  </span>
-                  <span className="font-label-sm text-label-sm text-on-surface-variant">
-                    {persona.rol}
-                  </span>
-                </div>
-                <div className="flex flex-wrap gap-space-xs pt-1">
-                  <a
-                    href={`mailto:${persona.email}`}
-                    className="rounded-full bg-primary px-3.5 py-1.5 font-label-md text-label-md font-semibold text-on-primary transition-transform active:scale-95"
-                  >
-                    Correo
-                  </a>
-                  {persona.sitio && (
-                    <a
-                      href={persona.sitio.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="rounded-full border border-primary px-3.5 py-1.5 font-label-md text-label-md font-semibold text-primary transition-colors hover:bg-primary-container"
-                    >
-                      Página web
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <FooterEditorial entity={proyecto.footer.entity} description={proyecto.footer.description} />
-
-      <Toast toast={toast} />
     </>
   );
 }

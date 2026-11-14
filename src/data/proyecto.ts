@@ -69,8 +69,10 @@ export const proyecto = {
     description:
       '“Las luchas todavía no terminan para esta comunidad [...] aún se lucha por nuevos sueños imposibles”. Si guarda historias, fotografías o recuerdos de las veredas carmelitanas, súmalos a este archivo vivo.',
     contributeLabel: 'Aportar al archivo familiar',
-    contributeMessage: 'El formulario de aportes estará disponible próximamente',
+    contributeHref:
+      'mailto:zuluagatorodaniela@gmail.com?subject=Aporte%20al%20archivo%20familiar%20—%20Historias%20de%20la%20Ruralidad%20Carmelitana',
     contactLabel: 'Contactar al equipo',
+    contactHref: '/contacto',
   },
   footer: {
     entity: 'Alcaldía de El Carmen de Viboral • Instituto de Cultura',
