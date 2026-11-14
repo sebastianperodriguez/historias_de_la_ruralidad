@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design tokens (Fase 1): paleta semántica Material 3 extraída de
+ * propuesta_estilos — se completarán en la siguiente fase.
+ */
+@theme {
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-sans: 'Source Sans 3', 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: #fbf9f2;
+  color: #1b1c18;
+}
+
+.dark body {
+  background-color: #091610;
+  color: #d7e6dc;
+}
