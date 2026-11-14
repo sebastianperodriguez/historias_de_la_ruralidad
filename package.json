@@ -19,7 +19,8 @@
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",
     "prepare": "husky",
-    "magazine:convert": "node scripts/convert-magazine.mjs"
+    "magazine:convert": "node scripts/convert-magazine.mjs",
+    "proyecto:convert": "node scripts/convert-proyecto.mjs"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

@@ -1,3 +1,7 @@
+import auroraUrl from '@/assets/audio/aurora.mp3?url';
+import berceuseUrl from '@/assets/audio/berceuse.mp3?url';
+import cantandoNumerosUrl from '@/assets/audio/cantando-numeros.mp3?url';
+
 export type SuitePista = {
   numero: number;
   titulo: string;
@@ -5,8 +9,8 @@ export type SuitePista = {
 };
 
 /*
- * "Suite para la Aurora" — composición musical del proyecto audiovisual.
- * Los MP3 se integran cuando los archivos estén en src/assets/audio/.
+ * "Suite para la Aurora" — composición musical del proyecto audiovisual,
+ * compuesta por Sebastián Pérez Rodríguez.
  */
 export const suite = {
   titulo: 'Suite para la Aurora',
@@ -15,8 +19,8 @@ export const suite = {
   compositor: 'Sebastián Pérez Rodríguez',
   pistaMessage: 'Las pistas de la suite estarán disponibles próximamente',
   pistas: [
-    { numero: 1, titulo: 'Pista 1', src: undefined },
-    { numero: 2, titulo: 'Pista 2', src: undefined },
-    { numero: 3, titulo: 'Pista 3', src: undefined },
+    { numero: 1, titulo: 'Aurora', src: auroraUrl },
+    { numero: 2, titulo: 'Berceuse', src: berceuseUrl },
+    { numero: 3, titulo: 'Cantando Números', src: cantandoNumerosUrl },
   ] satisfies SuitePista[],
 } as const;

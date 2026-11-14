@@ -1,12 +1,9 @@
 import { Link } from 'react-router-dom';
 import { veredas } from '@/data/veredas';
 import { proyecto } from '@/data/proyecto';
-import { revista } from '@/data/revista';
-import { getRevistaPageUrl } from '@/lib/revista-pages';
 import { SuitePlayer } from '@/components/media/SuitePlayer';
 import { Badge } from '@/components/ui/Badge';
 import { FooterEditorial } from '@/components/ui/FooterEditorial';
-import { Icon } from '@/components/ui/Icon';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { StatCard } from '@/components/ui/StatCard';
 import { Toast } from '@/components/ui/Toast';
@@ -15,58 +12,52 @@ import { VeredaCard } from '@/components/ui/VeredaCard';
 
 export function HomePage() {
   const { toast, showToast } = useToast();
-  const heroImage = getRevistaPageUrl(1);
 
   return (
     <>
-      {/* Portada */}
+      {/* Portada del proyecto */}
       <section className="flex flex-col gap-space-sm px-margin pb-space-lg pt-space-md">
-        <Badge icon="history_edu" variant="primary" className="self-start">
+        <Badge variant="primary" className="self-start">
           {proyecto.nombre}
         </Badge>
         <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-primary">
-          {proyecto.titulo}
-          <span className="mt-1 block font-headline-sm text-headline-sm font-normal text-on-surface-variant">
-            {proyecto.subtitulo}
-          </span>
+          Memorias de la ruralidad carmelitana
         </h2>
         <p className="font-body-md text-body-md leading-relaxed text-on-surface-variant">
           {proyecto.descripcion}
         </p>
         <div className="flex items-center gap-space-md pt-space-xs text-on-surface-variant">
-          <span className="inline-flex items-center gap-1 font-label-md text-label-md text-primary">
-            <Icon name="menu_book" size={16} />
-            {revista.serie}
-          </span>
+          <span className="font-label-md text-label-md text-primary">El Carmen de Viboral</span>
           <span className="text-outline">•</span>
-          <span className="font-label-md text-label-md">{revista.lugar}</span>
+          <span className="font-label-md text-label-md">Antioquia, Colombia</span>
         </div>
       </section>
 
-      {/* Ilustración de portada */}
+      {/* Ilustración del proyecto */}
       <section className="px-margin pb-space-xl">
         <div className="overflow-hidden rounded-xl bg-surface-container-lowest shadow-md">
-          {heroImage && (
-            <img className="w-full object-cover" src={heroImage} alt={proyecto.hero.image.alt} />
-          )}
-          <div className="flex flex-col gap-space-xs bg-surface-container-low p-space-md">
-            <p className="font-quote-lg text-quote-lg italic leading-snug text-on-surface">
-              {proyecto.cita}
-            </p>
+          <img
+            className="w-full object-cover"
+            src={proyecto.hero.image.src}
+            alt={proyecto.hero.image.alt}
+          />
+          <div className="bg-surface-container-low p-space-md">
             <span className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
-              {proyecto.citaFuente}
+              {proyecto.hero.image.pie}
             </span>
           </div>
         </div>
       </section>
 
-      {/* El proyecto en cifras */}
+      {/* El proyecto */}
       <section className="px-margin pb-space-xl">
         <div className="flex flex-col gap-space-md rounded-xl bg-surface-container p-space-md">
           <div className="flex items-center gap-space-xs text-primary">
-            <Icon name="explore" size={20} />
-            <h3 className="font-headline-sm text-headline-sm">El proyecto en cifras</h3>
+            <h3 className="font-headline-sm text-headline-sm">El proyecto</h3>
           </div>
+          <p className="font-body-md text-body-md leading-relaxed text-on-surface">
+            {proyecto.metodologia}
+          </p>
           <div className="grid grid-cols-3 gap-space-xs">
             {proyecto.stats.map((stat) => (
               <StatCard key={stat.label} value={stat.value} label={stat.label} />
@@ -75,28 +66,37 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Revista */}
-      <section className="px-margin pb-space-xl">
-        <SectionHeader
-          kicker={proyecto.secciones.revista.kicker}
-          title={proyecto.secciones.revista.title}
-        />
-        <Link
-          to="/revista"
-          className="group mt-space-sm flex items-center justify-between gap-space-sm rounded-xl bg-primary p-space-md shadow-md transition-colors hover:bg-on-primary-container"
-        >
-          <div className="flex min-w-0 flex-col gap-1">
-            <span className="font-label-sm text-label-sm uppercase tracking-wider text-on-primary/80">
-              {proyecto.secciones.revista.description}
-            </span>
-            <span className="font-headline-sm text-headline-sm text-on-primary">
-              {proyecto.secciones.revista.cta}
-            </span>
-          </div>
-          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-on-primary/15 text-on-primary transition-transform group-hover:scale-105">
-            <Icon name="auto_stories" size={20} />
-          </div>
-        </Link>
+      {/* Tarjetas de acceso */}
+      <section className="flex flex-col gap-space-md px-margin pb-space-xl">
+        <SectionHeader kicker={proyecto.accesos.kicker} title={proyecto.accesos.title} />
+        {proyecto.accesos.cards.map((card) => (
+          <Link
+            key={card.title}
+            to={card.href}
+            className="flex items-stretch gap-space-sm overflow-hidden rounded-xl bg-surface-container-lowest p-2 shadow-sm transition-colors hover:bg-surface-container"
+          >
+            <img
+              src={card.image.src}
+              alt={card.image.alt}
+              loading="lazy"
+              className="h-24 w-28 flex-shrink-0 rounded-lg object-cover"
+            />
+            <div className="flex min-w-0 flex-col justify-center gap-0.5">
+              <span className="font-label-sm text-label-sm uppercase tracking-wider text-primary">
+                {card.kicker}
+              </span>
+              <span className="font-label-md text-label-md font-semibold text-on-surface">
+                {card.title}
+              </span>
+              <span className="line-clamp-2 font-body-sm text-body-sm text-on-surface-variant">
+                {card.description}
+              </span>
+              <span className="font-label-sm text-label-sm font-semibold text-primary">
+                {card.cta} ›
+              </span>
+            </div>
+          </Link>
+        ))}
       </section>
 
       {/* Cuadernos de campo */}
@@ -117,36 +117,61 @@ export function HomePage() {
           kicker={proyecto.secciones.suite.kicker}
           title={proyecto.secciones.suite.title}
         />
-        <SuitePlayer onMissingTrack={() => showToast(proyecto.secciones.suite.cta, 'music_note')} />
+        <SuitePlayer />
       </section>
 
       {/* Documental */}
       <section className="px-margin pb-space-xl">
-        <div className="flex flex-col gap-space-sm rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
-          <div className="flex items-center gap-space-xs text-primary">
-            <Icon name="smart_display" size={18} />
-            <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider">
+        <div className="overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm">
+          <img
+            src={proyecto.secciones.documental.image.src}
+            alt={proyecto.secciones.documental.image.alt}
+            loading="lazy"
+            className="h-40 w-full object-cover"
+          />
+          <div className="flex flex-col gap-space-sm p-space-md">
+            <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-primary">
               {proyecto.secciones.documental.kicker}
             </span>
+            <h3 className="font-headline-sm text-headline-sm text-on-surface">
+              {proyecto.secciones.documental.title}
+            </h3>
+            <p className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
+              {proyecto.secciones.documental.description}
+            </p>
+            <Link
+              to="/documental"
+              className="flex h-11 items-center justify-center rounded-full bg-primary font-label-md text-label-md font-semibold text-on-primary shadow transition-transform active:scale-95"
+            >
+              {proyecto.secciones.documental.cta}
+            </Link>
           </div>
+        </div>
+      </section>
+
+      {/* La investigadora */}
+      <section className="px-margin pb-space-xl">
+        <div className="flex flex-col gap-space-sm rounded-xl border border-primary/30 bg-primary-container/40 p-space-md">
+          <span className="font-label-sm text-label-sm font-semibold uppercase tracking-widest text-primary">
+            {proyecto.investigadora.kicker}
+          </span>
           <h3 className="font-headline-sm text-headline-sm text-on-surface">
-            {proyecto.secciones.documental.title}
+            {proyecto.investigadora.nombre}
           </h3>
           <p className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
-            {proyecto.secciones.documental.description}
+            {proyecto.investigadora.bio}
           </p>
           <Link
-            to="/documental"
-            className="flex h-11 items-center justify-center gap-space-xs rounded-full bg-primary font-label-md text-label-md text-on-primary shadow transition-transform active:scale-95"
+            to="/revista"
+            className="self-start font-label-md text-label-md font-semibold text-primary hover:underline"
           >
-            <Icon name="play_arrow" size={18} />
-            <span>{proyecto.secciones.documental.cta}</span>
+            {proyecto.investigadora.enRevista} ›
           </Link>
         </div>
       </section>
 
       {/* Llamado comunitario */}
-      <section className="px-margin pb-space-xl">
+      <section id={proyecto.cta.id} className="scroll-mt-24 px-margin pb-space-xl">
         <div className="relative flex flex-col gap-space-md overflow-hidden rounded-xl bg-primary p-space-lg shadow-md">
           <div className="pointer-events-none absolute -bottom-8 -right-8 h-36 w-36 rounded-full bg-secondary/25" />
           <Badge
@@ -166,18 +191,16 @@ export function HomePage() {
           <div className="flex flex-col gap-space-sm pt-space-xs sm:flex-row">
             <button
               type="button"
-              onClick={() => showToast(proyecto.cta.contributeMessage, 'add_photo_alternate')}
-              className="flex h-11 items-center justify-center gap-space-xs rounded-full bg-surface font-label-md text-label-md text-primary shadow transition-transform active:scale-95"
+              onClick={() => showToast(proyecto.cta.contributeMessage)}
+              className="flex h-11 items-center justify-center rounded-full bg-surface font-label-md text-label-md font-semibold text-primary shadow transition-transform active:scale-95"
             >
-              <Icon name="add_photo_alternate" size={18} />
               <span>{proyecto.cta.contributeLabel}</span>
             </button>
             <button
               type="button"
-              onClick={() => showToast(proyecto.cta.contactMessage, 'contacts')}
-              className="flex h-11 items-center justify-center gap-space-xs rounded-full border border-on-primary/40 font-label-md text-label-md text-on-primary transition-colors hover:bg-on-primary/10"
+              onClick={() => showToast(proyecto.cta.contactMessage)}
+              className="flex h-11 items-center justify-center rounded-full border border-on-primary/40 font-label-md text-label-md text-on-primary transition-colors hover:bg-on-primary/10"
             >
-              <Icon name="contacts" size={18} />
               <span>{proyecto.cta.contactLabel}</span>
             </button>
           </div>

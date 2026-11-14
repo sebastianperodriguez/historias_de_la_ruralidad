@@ -1,3 +1,5 @@
+import ilustracionAuroraUrl from '@/assets/proyecto/ilustracion-aurora.webp';
+
 export type AuroraHito = {
   title: string;
   description: string;
@@ -8,6 +10,11 @@ export const aurora = {
   cuaderno: 'Cuaderno de Campo No. 01',
   ficha: 'Ficha Etnográfica',
   subtitle: 'Memorias de una vereda construida en comunidad',
+  hero: {
+    src: ilustracionAuroraUrl,
+    alt: 'Ilustración de Viviana Serna: paisaje de lomas y terrazas de cultivo de la vereda La Aurora',
+    pie: 'Ilustración de Viviana Serna Arbeláez — obra del proyecto',
+  },
   fichaStats: [
     { label: 'Entrevistas', value: '4', note: 'Historias orales' },
     { label: 'Talleres', value: '4', note: 'Con la comunidad' },
