@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { DefaultLayout } from '@/layouts/DefaultLayout';
 import { HomePage } from '@/pages/HomePage';
@@ -10,13 +9,6 @@ import { LaHondaPage } from '@/pages/LaHondaPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 export default function App() {
-  useEffect(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (prefersDark) {
-      document.documentElement.classList.add('dark');
-    }
-  }, []);
-
   return (
     <Routes>
       <Route element={<DefaultLayout />}>
