@@ -29,12 +29,18 @@ describe('HomePage', () => {
   it('shows the contact section with the project team', () => {
     renderPage();
     expect(screen.getByText(contacto.title)).toBeInTheDocument();
+    const emailButtons = screen.getAllByRole('link', { name: 'Correo' });
+    expect(emailButtons).toHaveLength(contacto.personas.length);
     for (const persona of contacto.personas) {
       expect(screen.getByText(persona.nombre)).toBeInTheDocument();
       expect(screen.getByText(persona.rol)).toBeInTheDocument();
-      const emailLink = screen.getByRole('link', { name: persona.email });
-      expect(emailLink).toHaveAttribute('href', `mailto:${persona.email}`);
+      expect(
+        emailButtons.some((button) => button.getAttribute('href') === `mailto:${persona.email}`),
+      ).toBe(true);
     }
+    const sitioButton = screen.getByRole('link', { name: 'Página web' });
+    expect(sitioButton).toHaveAttribute('href', 'https://www.sebasperez.dev/');
+    expect(sitioButton).toHaveAttribute('target', '_blank');
   });
 
   it('renders access cards to the La Aurora content', () => {

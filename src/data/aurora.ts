@@ -1,7 +1,7 @@
 import tallerFotobordadoUrl from '@/assets/proyecto/taller-fotobordado.webp';
 import tallerDetalleUrl from '@/assets/proyecto/taller-detalle.webp';
 import documentalPaisajeUrl from '@/assets/proyecto/documental-paisaje.webp';
-import { revista } from '@/data/revista';
+import suiteArteUrl from '@/assets/proyecto/suite-arte.webp';
 
 export type AuroraHito = {
   title: string;
@@ -31,7 +31,8 @@ export const aurora = {
     items: [
       {
         title: 'El Documental',
-        description: 'El registro audiovisual completo del proyecto.',
+        description:
+          'El registro audiovisual del proyecto: recorridos, talleres y testimonios de la comunidad, con tomas aéreas del territorio y la banda sonora original de la serie.',
         href: '#documental',
         image: {
           src: documentalPaisajeUrl,
@@ -40,7 +41,8 @@ export const aurora = {
       },
       {
         title: 'La Revista',
-        description: `${revista.totalPaginas} páginas de memoria oral, fotografía e ilustración.`,
+        description:
+          'La publicación completa de 38 páginas donde la memoria oral de la vereda se entreteje con las fotografías del trabajo de campo y las ilustraciones de Viviana Serna.',
         href: '#revista',
         image: {
           src: tallerFotobordadoUrl,
@@ -49,11 +51,22 @@ export const aurora = {
       },
       {
         title: 'El fotobordado',
-        description: 'La comunidad bordó sus recuerdos sobre las fotografías de la vereda.',
-        href: '#suite',
+        description:
+          'Talleres donde la comunidad bordó sus recuerdos directamente sobre las fotografías de la vereda: hilos, coronas y alados que convierten cada retrato en memoria viva. Mira aquí el archivo completo de imágenes.',
+        href: '#fotografias',
         image: {
           src: tallerDetalleUrl,
           alt: 'Detalle de un fotobordado bordado sobre una fotografía',
+        },
+      },
+      {
+        title: 'La Suite para La Aurora',
+        description:
+          'Composición musical de Sebastián Pérez para el proyecto audiovisual: tres piezas que acompañan el recorrido por la memoria de la vereda. Escúchalas al final de esta página.',
+        href: '#suite',
+        image: {
+          src: suiteArteUrl,
+          alt: 'Ilustración en negativo de Viviana Serna: familias campesinas bajo un cielo anaranjado',
         },
       },
     ] satisfies AuroraActividad[],

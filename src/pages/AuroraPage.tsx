@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { aurora } from '@/data/aurora';
+import { galeria } from '@/data/galeria';
 import { revista } from '@/data/revista';
+import suiteArteUrl from '@/assets/proyecto/suite-arte.webp';
 import { MagazineViewer } from '@/components/media/MagazineViewer';
+import { PhotoGallery } from '@/components/media/PhotoGallery';
 import { SuitePlayer } from '@/components/media/SuitePlayer';
 import { Badge } from '@/components/ui/Badge';
 import { SectionHeader } from '@/components/ui/SectionHeader';
@@ -53,6 +56,27 @@ export function AuroraPage() {
         </div>
       </section>
 
+      {/* Origen del nombre */}
+      <article className="flex flex-col gap-space-md px-margin py-space-md">
+        <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-primary">
+          {aurora.cronica.kicker}
+        </span>
+        <h3 className="font-headline-md text-headline-md leading-tight text-primary">
+          {aurora.cronica.title}
+        </h3>
+        <div className="flex flex-col gap-space-sm font-body-md text-body-md text-on-surface">
+          <p>
+            <span className="float-left pr-3 pt-1 font-display text-display-lg leading-none text-primary">
+              {aurora.cronica.lead.charAt(0)}
+            </span>
+            {aurora.cronica.lead.slice(1)}
+          </p>
+          <p className="font-body-sm text-body-sm text-on-surface-variant">
+            {aurora.cronica.secondary}
+          </p>
+        </div>
+      </article>
+
       {/* Actividades realizadas */}
       <section className="flex flex-col gap-space-md px-margin py-space-md">
         <SectionHeader kicker={aurora.actividades.kicker} title={aurora.actividades.title} />
@@ -72,7 +96,7 @@ export function AuroraPage() {
               <span className="font-label-md text-label-md font-semibold text-on-surface">
                 {actividad.title}
               </span>
-              <span className="line-clamp-2 font-body-sm text-body-sm text-on-surface-variant">
+              <span className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
                 {actividad.description}
               </span>
               <span className="font-label-sm text-label-sm font-semibold text-primary">
@@ -95,7 +119,7 @@ export function AuroraPage() {
           <p className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
             {aurora.documental.description}
           </p>
-          <div className="aspect-video w-full overflow-hidden rounded-lg">
+          <div className="mx-auto aspect-video w-full max-w-xl overflow-hidden rounded-lg">
             <iframe
               className="h-full w-full"
               src={aurora.documental.youtubeEmbedUrl}
@@ -150,32 +174,35 @@ export function AuroraPage() {
         </div>
       </section>
 
+      {/* Registro fotográfico */}
+      <section
+        id="fotografias"
+        className="scroll-mt-24 flex flex-col gap-space-md px-margin pb-space-xl"
+      >
+        <SectionHeader
+          kicker="El Taller de Memoria"
+          title="Fotografías del proyecto"
+          trailing={`${galeria.length} imágenes`}
+        />
+        <PhotoGallery photos={galeria} />
+      </section>
+
       {/* Suite musical */}
       <section id="suite" className="scroll-mt-24 flex flex-col gap-space-md px-margin pb-space-xl">
         <SectionHeader kicker="Banda Sonora" title="Suite para la Aurora" />
+        <figure className="overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm">
+          <img
+            src={suiteArteUrl}
+            alt="Ilustración en negativo de Viviana Serna: familias campesinas bajo un cielo anaranjado"
+            loading="lazy"
+            className="h-64 w-full object-cover"
+          />
+          <figcaption className="bg-surface-container-low p-space-sm font-label-sm text-label-sm text-on-surface-variant">
+            Ilustración de Viviana Serna Arbeláez — arte de la Suite para La Aurora
+          </figcaption>
+        </figure>
         <SuitePlayer />
       </section>
-
-      {/* Origen del nombre */}
-      <article className="flex flex-col gap-space-md px-margin py-space-md">
-        <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-primary">
-          {aurora.cronica.kicker}
-        </span>
-        <h3 className="font-headline-md text-headline-md leading-tight text-primary">
-          {aurora.cronica.title}
-        </h3>
-        <div className="flex flex-col gap-space-sm font-body-md text-body-md text-on-surface">
-          <p>
-            <span className="float-left pr-3 pt-1 font-display text-display-lg leading-none text-primary">
-              {aurora.cronica.lead.charAt(0)}
-            </span>
-            {aurora.cronica.lead.slice(1)}
-          </p>
-          <p className="font-body-sm text-body-sm text-on-surface-variant">
-            {aurora.cronica.secondary}
-          </p>
-        </div>
-      </article>
 
       {/* Testimonio real */}
       <section className="px-margin my-space-md">

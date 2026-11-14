@@ -32,7 +32,7 @@ export function HomePage() {
 
       {/* Imagen de portada */}
       <section className="px-margin pb-space-xl">
-        <figure className="mx-auto w-full max-w-md overflow-hidden rounded-xl bg-surface-container-lowest shadow-md">
+        <figure className="mx-auto w-full max-w-xl overflow-hidden rounded-xl bg-surface-container-lowest shadow-md">
           <img
             className="aspect-[4/3] w-full object-cover"
             src={proyecto.hero.image.src}
@@ -126,30 +126,34 @@ export function HomePage() {
             {contacto.personas.map((persona) => (
               <div
                 key={persona.nombre}
-                className="flex flex-col gap-1 rounded-xl bg-surface-container-low p-space-md"
+                className="flex flex-col gap-space-sm rounded-xl bg-surface-container-low p-space-md"
               >
-                <span className="font-label-md text-label-md font-semibold text-on-surface">
-                  {persona.nombre}
-                </span>
-                <span className="font-label-sm text-label-sm text-on-surface-variant">
-                  {persona.rol}
-                </span>
-                <a
-                  href={`mailto:${persona.email}`}
-                  className="font-label-md text-label-md text-primary hover:underline"
-                >
-                  {persona.email}
-                </a>
-                {persona.sitio && (
+                <div className="flex flex-col gap-0.5">
+                  <span className="font-label-md text-label-md font-semibold text-on-surface">
+                    {persona.nombre}
+                  </span>
+                  <span className="font-label-sm text-label-sm text-on-surface-variant">
+                    {persona.rol}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-space-xs pt-1">
                   <a
-                    href={persona.sitio.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-label-md text-label-md text-primary hover:underline"
+                    href={`mailto:${persona.email}`}
+                    className="rounded-full bg-primary px-3.5 py-1.5 font-label-md text-label-md font-semibold text-on-primary transition-transform active:scale-95"
                   >
-                    {persona.sitio.label}
+                    Correo
                   </a>
-                )}
+                  {persona.sitio && (
+                    <a
+                      href={persona.sitio.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full border border-primary px-3.5 py-1.5 font-label-md text-label-md font-semibold text-primary transition-colors hover:bg-primary-container"
+                    >
+                      Página web
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>

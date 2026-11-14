@@ -11,6 +11,8 @@ export function MagazineViewer({ pages: pagesProp }: MagazineViewerProps) {
   const pages = pagesProp ?? getRevistaPageUrls();
   const [index, setIndex] = useState(0);
   const [thumbnailsOpen, setThumbnailsOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
 
   const total = pages.length;
@@ -24,6 +26,26 @@ export function MagazineViewer({ pages: pagesProp }: MagazineViewerProps) {
   );
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
   const prev = useCallback(() => goTo(index - 1), [goTo, index]);
+
+  const toggleFullscreen = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+    } else {
+      void container.requestFullscreen();
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
@@ -52,7 +74,8 @@ export function MagazineViewer({ pages: pagesProp }: MagazineViewerProps) {
     <div className="flex flex-col gap-space-sm">
       {/* Visor */}
       <div
-        className="relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-md"
+        ref={containerRef}
+        className={`relative overflow-hidden bg-surface-container-lowest shadow-md ${isFullscreen ? 'flex h-dvh items-center justify-center' : 'rounded-xl'}`}
         onTouchStart={(event) => {
           touchStartX.current = event.touches[0]?.clientX ?? null;
         }}
@@ -75,7 +98,9 @@ export function MagazineViewer({ pages: pagesProp }: MagazineViewerProps) {
           key={currentUrl}
           src={currentUrl}
           alt={`Página ${index + 1} de la revista La Aurora`}
-          className="mx-auto max-h-[80dvh] w-auto max-w-full"
+          className={
+            isFullscreen ? 'max-h-dvh w-auto max-w-full' : 'mx-auto max-h-[80dvh] w-auto max-w-full'
+          }
           loading={index === 0 ? 'eager' : 'lazy'}
         />
         {/* Precarga silenciosa de la página siguiente */}
@@ -110,7 +135,7 @@ export function MagazineViewer({ pages: pagesProp }: MagazineViewerProps) {
       </div>
 
       {/* Controles */}
-      <div className="flex items-center justify-between px-margin">
+      <div className="flex items-center justify-between gap-2 px-margin">
         <button
           type="button"
           onClick={() => setThumbnailsOpen((open) => !open)}
@@ -118,6 +143,13 @@ export function MagazineViewer({ pages: pagesProp }: MagazineViewerProps) {
           className="flex items-center gap-1 font-label-md text-label-md text-primary hover:underline"
         >
           <span>{thumbnailsOpen ? 'Ocultar miniaturas' : 'Ver miniaturas'}</span>
+        </button>
+        <button
+          type="button"
+          onClick={toggleFullscreen}
+          className="rounded-full border border-outline-variant px-3 py-1 font-label-md text-label-md text-on-surface transition-colors hover:bg-surface-container"
+        >
+          {isFullscreen ? 'Salir de pantalla completa' : 'Pantalla completa'}
         </button>
         <span className="font-label-sm text-label-sm text-outline">
           Página {(pages[index] ?? index + 1).toString().padStart(2, '0')}

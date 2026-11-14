@@ -11,7 +11,7 @@ describe('SuitePlayer', () => {
     expect(screen.getByText(suite.compositor)).toBeInTheDocument();
     expect(screen.getAllByText('Aurora').length).toBeGreaterThanOrEqual(2);
     expect(screen.getByText('Berceuse')).toBeInTheDocument();
-    expect(screen.getByText('Cantando Números')).toBeInTheDocument();
+    expect(screen.getByText('Cantando Numebares')).toBeInTheDocument();
     expect(screen.getByText('3 pistas')).toBeInTheDocument();
   });
 
@@ -23,7 +23,7 @@ describe('SuitePlayer', () => {
 
   it('selects another track from the playlist', async () => {
     render(<SuitePlayer />);
-    const pista3 = screen.getByRole('button', { name: /Cantando Números/ });
+    const pista3 = screen.getByRole('button', { name: /Cantando Numebares/ });
     await userEvent.click(pista3);
     expect(pista3).toHaveAttribute('aria-current', 'true');
     expect(screen.getByRole('button', { name: /Aurora/ })).toHaveAttribute('aria-current', 'false');

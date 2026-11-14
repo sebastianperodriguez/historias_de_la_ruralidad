@@ -21,6 +21,6 @@ export const suite = {
   pistas: [
     { numero: 1, titulo: 'Aurora', src: auroraUrl },
     { numero: 2, titulo: 'Berceuse', src: berceuseUrl },
-    { numero: 3, titulo: 'Cantando Números', src: cantandoNumerosUrl },
+    { numero: 3, titulo: 'Cantando Numebares', src: cantandoNumerosUrl },
   ] satisfies SuitePista[],
 } as const;

@@ -1,6 +1,7 @@
 import tallerDetalleUrl from '@/assets/proyecto/taller-detalle.webp';
 import veredaPaisajeUrl from '@/assets/proyecto/vereda-paisaje.webp';
 import ilustracionHeroUrl from '@/assets/proyecto/ilustracion-hero.webp';
+import suiteArteUrl from '@/assets/proyecto/suite-arte.webp';
 import { revista } from '@/data/revista';
 
 export type AccesoCard = {
@@ -41,11 +42,22 @@ export const proyecto = {
         kicker: 'Talleres de memoria',
         title: 'El fotobordado',
         description: 'La comunidad bordó sus recuerdos sobre las fotografías de la vereda.',
-        cta: 'Ver La Aurora',
-        href: '/la-aurora',
+        cta: 'Ver las fotografías',
+        href: '/la-aurora#fotografias',
         image: {
           src: tallerDetalleUrl,
           alt: 'Detalle de un fotobordado bordado sobre una fotografía',
+        },
+      },
+      {
+        kicker: 'Banda Sonora',
+        title: 'Escucha la Suite para La Aurora de Sebastián Pérez',
+        description: 'Tres piezas musicales para acompañar la memoria de la vereda.',
+        cta: 'Escuchar la suite',
+        href: '/la-aurora#suite',
+        image: {
+          src: suiteArteUrl,
+          alt: 'Ilustración en negativo de Viviana Serna: familias campesinas bajo un cielo anaranjado',
         },
       },
     ] satisfies AccesoCard[],

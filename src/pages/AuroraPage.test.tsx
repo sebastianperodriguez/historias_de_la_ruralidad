@@ -52,7 +52,7 @@ describe('AuroraPage', () => {
     renderPage();
     expect(document.getElementById('suite')).not.toBeNull();
     expect(screen.getAllByText('Aurora').length).toBeGreaterThanOrEqual(2);
-    expect(screen.getByText('Cantando Números')).toBeInTheDocument();
+    expect(screen.getByText('Cantando Numebares')).toBeInTheDocument();
   });
 
   it('renders the chronicle and the real community testimonial', () => {
