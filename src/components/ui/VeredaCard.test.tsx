@@ -13,17 +13,15 @@ describe('VeredaCard', () => {
       </MemoryRouter>,
     );
     expect(screen.getByText('Vereda La Aurora')).toBeInTheDocument();
-    expect(screen.getByText('2.150 m.s.n.m.')).toBeInTheDocument();
-    expect(screen.getByText('24 testimonios')).toBeInTheDocument();
-    const link = screen.getByRole('link', { name: 'Leer investigación de la Vereda La Aurora' });
-    expect(link).toHaveAttribute('href', '/la-aurora');
-    expect(screen.getByRole('img', { name: laAurora.image.alt })).toHaveAttribute(
-      'loading',
-      'lazy',
-    );
+    expect(screen.getByText('Cuaderno No. 01')).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'Abrir el cuaderno de la Vereda La Aurora' }),
+    ).toHaveAttribute('href', '/la-aurora');
+    const image = screen.getByRole('img', { name: laAurora.image.alt });
+    expect(image).toHaveAttribute('loading', 'lazy');
   });
 
-  it('renders the unavailable vereda with coming-soon link', () => {
+  it('renders the unavailable vereda with a placeholder and coming-soon link', () => {
     const laHonda = veredas[1]!;
     render(
       <MemoryRouter>
@@ -32,6 +30,6 @@ describe('VeredaCard', () => {
     );
     const link = screen.getByRole('link', { name: 'Vereda La Honda próximamente' });
     expect(link).toHaveAttribute('href', '/la-honda');
-    expect(screen.getByText('Próximamente')).toBeInTheDocument();
+    expect(screen.getAllByText('Próximamente').length).toBeGreaterThan(0);
   });
 });

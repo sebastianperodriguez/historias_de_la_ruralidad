@@ -3,41 +3,33 @@ import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import App from '@/App';
 
+function renderAt(initialPath: string) {
+  return render(
+    <MemoryRouter initialEntries={[initialPath]}>
+      <App />
+    </MemoryRouter>,
+  );
+}
+
 describe('App routing', () => {
-  it('renders the home placeholder at "/"', () => {
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>,
-    );
-    expect(screen.getByText(/Historias de Ruralidad/)).toBeInTheDocument();
+  it('renders the home page at "/"', () => {
+    renderAt('/');
+    expect(screen.getAllByText(/Historias de la Ruralidad Carmelitana/).length).toBeGreaterThan(0);
   });
 
   it('renders the La Honda coming-soon page at "/la-honda"', () => {
-    render(
-      <MemoryRouter initialEntries={['/la-honda']}>
-        <App />
-      </MemoryRouter>,
-    );
+    renderAt('/la-honda');
     expect(screen.getByText('Vereda La Honda')).toBeInTheDocument();
     expect(screen.getByText(/próximamente/i)).toBeInTheDocument();
   });
 
-  it('renders the story page with slug param', () => {
-    render(
-      <MemoryRouter initialEntries={['/la-aurora/historias/el-despertar']}>
-        <App />
-      </MemoryRouter>,
-    );
-    expect(screen.getByText('Historia: el-despertar')).toBeInTheDocument();
+  it('renders a magazine chapter as a story page', () => {
+    renderAt('/la-aurora/historias/primeros-gestos');
+    expect(screen.getByText('Primeros gestos al habitar lo rural')).toBeInTheDocument();
   });
 
   it('renders the not-found page for unknown routes', () => {
-    render(
-      <MemoryRouter initialEntries={['/no-existe']}>
-        <App />
-      </MemoryRouter>,
-    );
+    renderAt('/no-existe');
     expect(screen.getByText('Página no encontrada')).toBeInTheDocument();
   });
 });

@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom';
 import { veredas } from '@/data/veredas';
 import { proyecto } from '@/data/proyecto';
-import { AudioPlayer } from '@/components/media/AudioPlayer';
+import { revista } from '@/data/revista';
+import { getRevistaPageUrl } from '@/lib/revista-pages';
+import { SuitePlayer } from '@/components/media/SuitePlayer';
 import { Badge } from '@/components/ui/Badge';
 import { FooterEditorial } from '@/components/ui/FooterEditorial';
 import { Icon } from '@/components/ui/Icon';
@@ -12,169 +15,151 @@ import { VeredaCard } from '@/components/ui/VeredaCard';
 
 export function HomePage() {
   const { toast, showToast } = useToast();
+  const heroImage = getRevistaPageUrl(1);
 
   return (
     <>
-      {/* Cabecera editorial */}
+      {/* Portada */}
       <section className="flex flex-col gap-space-sm px-margin pb-space-lg pt-space-md">
-        <Badge icon="history_edu" className="self-start">
-          Archivo Vivo Comunitario
+        <Badge icon="history_edu" variant="primary" className="self-start">
+          {proyecto.nombre}
         </Badge>
-        <h2 className="font-headline-lg-mobile text-headline-lg-mobile tracking-tight text-primary">
-          {proyecto.title}
+        <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-primary">
+          {proyecto.titulo}
+          <span className="mt-1 block font-headline-sm text-headline-sm font-normal text-on-surface-variant">
+            {proyecto.subtitulo}
+          </span>
         </h2>
         <p className="font-body-md text-body-md leading-relaxed text-on-surface-variant">
-          {proyecto.description}
+          {proyecto.descripcion}
         </p>
         <div className="flex items-center gap-space-md pt-space-xs text-on-surface-variant">
-          <span className="inline-flex items-center gap-1 font-label-md text-label-md text-secondary">
+          <span className="inline-flex items-center gap-1 font-label-md text-label-md text-primary">
             <Icon name="menu_book" size={16} />
-            {proyecto.meta.tomo}
+            {revista.serie}
           </span>
-          <span className="text-surface-dim">•</span>
-          <span className="font-label-md text-label-md">{proyecto.meta.lugar}</span>
+          <span className="text-outline">•</span>
+          <span className="font-label-md text-label-md">{revista.lugar}</span>
         </div>
       </section>
 
-      {/* Ilustración principal */}
+      {/* Ilustración de portada */}
       <section className="px-margin pb-space-xl">
         <div className="overflow-hidden rounded-xl bg-surface-container-lowest shadow-md">
-          <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface-container">
-            <img
-              className="h-full w-full object-cover"
-              src={proyecto.hero.image.src}
-              alt={proyecto.hero.image.alt}
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
-            <div className="absolute bottom-3 right-3 flex items-center gap-1 rounded bg-surface/90 px-2.5 py-1 text-primary shadow-sm backdrop-blur-md">
-              <Icon name="brush" size={14} className="text-secondary" />
-              <span className="font-label-sm text-label-sm">{proyecto.hero.chip}</span>
-            </div>
-          </div>
+          {heroImage && (
+            <img className="w-full object-cover" src={heroImage} alt={proyecto.hero.image.alt} />
+          )}
           <div className="flex flex-col gap-space-xs bg-surface-container-low p-space-md">
-            <p className="font-quote-lg text-quote-lg italic leading-snug text-primary">
-              {proyecto.hero.quote}
+            <p className="font-quote-lg text-quote-lg italic leading-snug text-on-surface">
+              {proyecto.cita}
             </p>
             <span className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
-              {proyecto.hero.caption}
+              {proyecto.citaFuente}
             </span>
           </div>
         </div>
       </section>
 
-      {/* Marco territorial */}
+      {/* El proyecto en cifras */}
       <section className="px-margin pb-space-xl">
         <div className="flex flex-col gap-space-md rounded-xl bg-surface-container p-space-md">
           <div className="flex items-center gap-space-xs text-primary">
-            <Icon name="explore" size={20} className="text-secondary" />
-            <h3 className="font-headline-sm text-headline-sm">{proyecto.territorio.title}</h3>
+            <Icon name="explore" size={20} />
+            <h3 className="font-headline-sm text-headline-sm">El proyecto en cifras</h3>
           </div>
-          <p className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
-            {proyecto.territorio.description}
-          </p>
-          <div className="grid grid-cols-3 gap-space-xs pt-space-xs">
-            {proyecto.territorio.stats.map((stat) => (
-              <StatCard
-                key={stat.label}
-                value={stat.value}
-                label={stat.label}
-                colorClass={stat.colorClass}
-              />
+          <div className="grid grid-cols-3 gap-space-xs">
+            {proyecto.stats.map((stat) => (
+              <StatCard key={stat.label} value={stat.value} label={stat.label} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Veredas en custodia */}
+      {/* Revista */}
+      <section className="px-margin pb-space-xl">
+        <SectionHeader
+          kicker={proyecto.secciones.revista.kicker}
+          title={proyecto.secciones.revista.title}
+        />
+        <Link
+          to="/revista"
+          className="group mt-space-sm flex items-center justify-between gap-space-sm rounded-xl bg-primary p-space-md shadow-md transition-colors hover:bg-on-primary-container"
+        >
+          <div className="flex min-w-0 flex-col gap-1">
+            <span className="font-label-sm text-label-sm uppercase tracking-wider text-on-primary/80">
+              {proyecto.secciones.revista.description}
+            </span>
+            <span className="font-headline-sm text-headline-sm text-on-primary">
+              {proyecto.secciones.revista.cta}
+            </span>
+          </div>
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-on-primary/15 text-on-primary transition-transform group-hover:scale-105">
+            <Icon name="auto_stories" size={20} />
+          </div>
+        </Link>
+      </section>
+
+      {/* Cuadernos de campo */}
       <section className="flex flex-col gap-space-md px-margin pb-space-xl">
         <SectionHeader
-          kicker={proyecto.veredasSection.kicker}
-          title={proyecto.veredasSection.title}
-          trailing={proyecto.veredasSection.trailing}
+          kicker={proyecto.secciones.veredas.kicker}
+          title={proyecto.secciones.veredas.title}
+          trailing={proyecto.secciones.veredas.trailing}
         />
         {veredas.map((vereda) => (
           <VeredaCard key={vereda.slug} vereda={vereda} />
         ))}
       </section>
 
-      {/* Testimonio sonoro destacado */}
-      <section className="px-margin pb-space-xl">
-        <div className="flex flex-col gap-space-sm rounded-xl bg-surface-container-high p-space-md shadow-sm">
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1 font-label-sm text-label-sm uppercase tracking-wider text-secondary">
-              <Icon name="graphic_eq" size={15} />
-              {proyecto.audio.sectionLabel}
-            </span>
-            <span className="rounded bg-surface px-2 py-0.5 font-label-sm text-label-sm text-primary">
-              {proyecto.audio.audioNumber}
-            </span>
-          </div>
-          <AudioPlayer
-            title={proyecto.audio.title}
-            subtitle={proyecto.audio.subtitle}
-            avatarInitials={proyecto.audio.avatarInitials}
-            src={proyecto.audio.src}
-            transcript={proyecto.audio.transcript}
-          />
-        </div>
+      {/* Banda sonora */}
+      <section className="flex flex-col gap-space-md px-margin pb-space-xl">
+        <SectionHeader
+          kicker={proyecto.secciones.suite.kicker}
+          title={proyecto.secciones.suite.title}
+        />
+        <SuitePlayer onMissingTrack={() => showToast(proyecto.secciones.suite.cta, 'music_note')} />
       </section>
 
-      {/* Mapa comunitario */}
-      <section className="flex flex-col gap-space-sm px-margin pb-space-xl">
-        <div className="flex items-center justify-between">
-          <div>
-            <span className="font-label-sm text-label-sm uppercase tracking-wider text-secondary">
-              {proyecto.mapa.kicker}
+      {/* Documental */}
+      <section className="px-margin pb-space-xl">
+        <div className="flex flex-col gap-space-sm rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
+          <div className="flex items-center gap-space-xs text-primary">
+            <Icon name="smart_display" size={18} />
+            <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider">
+              {proyecto.secciones.documental.kicker}
             </span>
-            <h3 className="font-headline-sm text-headline-sm text-primary">
-              {proyecto.mapa.title}
-            </h3>
           </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded bg-surface-container-high text-primary">
-            <Icon name="layers" size={18} />
-          </div>
-        </div>
-        <div
-          className="relative flex h-56 w-full items-end overflow-hidden rounded-xl p-space-md shadow-sm"
-          style={{ backgroundImage: `url(${proyecto.mapa.image.src})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-primary/20 to-transparent" />
-          <div className="relative z-10 flex w-full items-center justify-between text-on-primary">
-            <div className="flex flex-col">
-              <span className="font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed">
-                Capa Activa
-              </span>
-              <span className="font-headline-sm text-headline-sm font-normal text-surface">
-                {proyecto.mapa.capa}
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() => showToast('El mapa comunitario estará disponible próximamente', 'map')}
-              className="flex items-center gap-1 rounded bg-surface/90 px-3 py-1.5 font-label-md text-label-md text-primary shadow backdrop-blur-sm transition-colors hover:bg-surface"
-            >
-              <Icon name="visibility" size={16} />
-              Explorar
-            </button>
-          </div>
+          <h3 className="font-headline-sm text-headline-sm text-on-surface">
+            {proyecto.secciones.documental.title}
+          </h3>
+          <p className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
+            {proyecto.secciones.documental.description}
+          </p>
+          <Link
+            to="/documental"
+            className="flex h-11 items-center justify-center gap-space-xs rounded-full bg-primary font-label-md text-label-md text-on-primary shadow transition-transform active:scale-95"
+          >
+            <Icon name="play_arrow" size={18} />
+            <span>{proyecto.secciones.documental.cta}</span>
+          </Link>
         </div>
       </section>
 
       {/* Llamado comunitario */}
       <section className="px-margin pb-space-xl">
         <div className="relative flex flex-col gap-space-md overflow-hidden rounded-xl bg-primary p-space-lg shadow-md">
-          <div className="pointer-events-none absolute -bottom-8 -right-8 h-36 w-36 rounded-full bg-secondary/15" />
+          <div className="pointer-events-none absolute -bottom-8 -right-8 h-36 w-36 rounded-full bg-secondary/25" />
           <Badge
             variant="primary"
-            className="self-start bg-primary-container text-on-primary uppercase tracking-wider"
+            className="self-start bg-primary-container uppercase tracking-wider"
           >
             {proyecto.cta.badge}
           </Badge>
           <div className="flex flex-col gap-space-xs">
-            <h3 className="font-headline-md text-headline-md leading-tight text-surface">
+            <h3 className="font-headline-md text-headline-md leading-tight text-on-primary">
               {proyecto.cta.title}
             </h3>
-            <p className="font-body-sm text-body-sm leading-relaxed text-primary-fixed-dim">
+            <p className="font-body-sm text-body-sm leading-relaxed text-on-primary/85">
               {proyecto.cta.description}
             </p>
           </div>
@@ -182,7 +167,7 @@ export function HomePage() {
             <button
               type="button"
               onClick={() => showToast(proyecto.cta.contributeMessage, 'add_photo_alternate')}
-              className="flex h-11 items-center justify-center gap-space-xs rounded bg-secondary font-label-md text-label-md text-on-secondary shadow transition-transform active:scale-95"
+              className="flex h-11 items-center justify-center gap-space-xs rounded-full bg-surface font-label-md text-label-md text-primary shadow transition-transform active:scale-95"
             >
               <Icon name="add_photo_alternate" size={18} />
               <span>{proyecto.cta.contributeLabel}</span>
@@ -190,7 +175,7 @@ export function HomePage() {
             <button
               type="button"
               onClick={() => showToast(proyecto.cta.contactMessage, 'contacts')}
-              className="flex h-11 items-center justify-center gap-space-xs rounded bg-primary-container font-label-md text-label-md text-on-primary transition-colors hover:bg-primary-container/80"
+              className="flex h-11 items-center justify-center gap-space-xs rounded-full border border-on-primary/40 font-label-md text-label-md text-on-primary transition-colors hover:bg-on-primary/10"
             >
               <Icon name="contacts" size={18} />
               <span>{proyecto.cta.contactLabel}</span>
