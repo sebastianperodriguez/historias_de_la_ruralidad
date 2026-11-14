@@ -18,7 +18,7 @@ export const contacto = {
     },
     {
       nombre: 'Sebastián Pérez',
-      rol: 'Composición musical, Diseño y desarrollo web',
+      rol: 'Composición musical, diseño y desarrollo web',
       email: 'sebastianperodriguez@gmail.com',
       sitio: { label: 'www.sebasperez.dev', url: 'https://www.sebasperez.dev/' },
     },
