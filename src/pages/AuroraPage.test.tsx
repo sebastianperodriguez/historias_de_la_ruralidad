@@ -40,12 +40,15 @@ describe('AuroraPage', () => {
     expect(iframe).toHaveAttribute('src', aurora.documental.youtubeEmbedUrl);
   });
 
-  it('integrates the magazine viewer', () => {
+  it('integrates the magazine viewer with a working pdf download', () => {
     renderPage();
     const revistaSection = document.getElementById('revista');
     expect(revistaSection).not.toBeNull();
     expect(screen.getByAltText('Página 1 de la revista La Aurora')).toBeInTheDocument();
     expect(screen.getByText('Investigación, edición:')).toBeInTheDocument();
+    const downloadLink = screen.getByRole('link', { name: 'Descargar revista (PDF)' });
+    expect(downloadLink).toHaveAttribute('href', '/revista/revista-digital.pdf');
+    expect(downloadLink).toHaveAttribute('download');
   });
 
   it('integrates the suite player', () => {

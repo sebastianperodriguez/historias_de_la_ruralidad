@@ -17,7 +17,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "magazine:convert": "node scripts/convert-magazine.mjs",
-    "proyecto:convert": "node scripts/convert-proyecto.mjs"
+    "proyecto:convert": "node scripts/convert-proyecto.mjs",
+    "pdf:build": "node scripts/build-pdf.mjs"
   },
   "dependencies": {
     "react": "^19.3.1",
@@ -41,6 +42,7 @@
     "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^17.14.0",
     "jsdom": "^31.0.1",
+    "pdf-lib": "^1.17.1",
     "prettier": "^3.10.1",
     "sharp": "^0.34.4",
     "tailwindcss": "^4.3.5",

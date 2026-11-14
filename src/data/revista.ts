@@ -49,7 +49,6 @@ export const revista = {
       'Técnica: Ilustración, tinta sobre papel • Dimensiones: 15 × 20 cm • Año: 2026 • Autora: Viviana Serna',
   },
   totalPaginas: 38,
-  pdfMessage: 'La descarga del PDF estará disponible próximamente',
   capitulos: [
     {
       slug: 'aportes-conceptuales',

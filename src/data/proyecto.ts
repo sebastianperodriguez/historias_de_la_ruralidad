@@ -2,6 +2,7 @@ import tallerDetalleUrl from '@/assets/proyecto/taller-detalle.webp';
 import veredaPaisajeUrl from '@/assets/proyecto/vereda-paisaje.webp';
 import ilustracionHeroUrl from '@/assets/proyecto/ilustracion-hero.webp';
 import suiteArteUrl from '@/assets/proyecto/suite-arte.webp';
+import documentalPaisajeUrl from '@/assets/proyecto/documental-paisaje.webp';
 import { revista } from '@/data/revista';
 
 export type AccesoCard = {
@@ -47,6 +48,18 @@ export const proyecto = {
         image: {
           src: tallerDetalleUrl,
           alt: 'Detalle de un fotobordado bordado sobre una fotografía',
+        },
+      },
+      {
+        kicker: 'Proyecto Audiovisual',
+        title: 'El Documental',
+        description:
+          'El registro audiovisual del proyecto, con tomas aéreas y la Suite para la Aurora.',
+        cta: 'Ver el documental',
+        href: '/la-aurora#documental',
+        image: {
+          src: documentalPaisajeUrl,
+          alt: 'Atardecer sobre el valle de El Carmen de Viboral',
         },
       },
       {

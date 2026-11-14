@@ -8,8 +8,6 @@ import { PhotoGallery } from '@/components/media/PhotoGallery';
 import { SuitePlayer } from '@/components/media/SuitePlayer';
 import { Badge } from '@/components/ui/Badge';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { Toast } from '@/components/ui/Toast';
-import { useToast } from '@/hooks/useToast';
 
 const hitoAccentClasses = {
   primary: 'bg-primary text-on-primary',
@@ -18,8 +16,6 @@ const hitoAccentClasses = {
 } as const;
 
 export function AuroraPage() {
-  const { toast, showToast } = useToast();
-
   return (
     <>
       {/* Ficha del cuaderno de campo */}
@@ -150,13 +146,13 @@ export function AuroraPage() {
           trailing={`${revista.totalPaginas} páginas`}
         />
         <MagazineViewer />
-        <button
-          type="button"
-          onClick={() => showToast(revista.pdfMessage)}
+        <a
+          href="/revista/revista-digital.pdf"
+          download="Revista La Aurora — Historias de la Ruralidad Carmelitana.pdf"
           className="mx-auto flex h-11 w-full max-w-md items-center justify-center rounded-full bg-primary font-label-md text-label-md font-semibold text-on-primary shadow transition-transform hover:bg-on-primary-container active:scale-[0.99]"
         >
           Descargar revista (PDF)
-        </button>
+        </a>
         <div className="flex flex-col gap-0.5 rounded-xl bg-surface-container-low p-space-md font-label-sm text-label-sm text-on-surface-variant">
           <span>
             <strong className="font-semibold text-on-surface">Fotografía:</strong>{' '}
@@ -354,8 +350,6 @@ export function AuroraPage() {
           </div>
         </Link>
       </section>
-
-      <Toast toast={toast} />
     </>
   );
 }

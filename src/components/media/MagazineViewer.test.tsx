@@ -36,4 +36,12 @@ describe('MagazineViewer', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Ocultar miniaturas' }));
     expect(screen.queryByRole('button', { name: 'Ir a la página 3' })).not.toBeInTheDocument();
   });
+
+  it('renders the fullscreen button over the page and toggles the fullscreen API', async () => {
+    render(<MagazineViewer />);
+    const button = screen.getByRole('button', { name: 'Pantalla completa' });
+    expect(button).toBeInTheDocument();
+    await userEvent.click(button);
+    expect(Element.prototype.requestFullscreen).toHaveBeenCalled();
+  });
 });

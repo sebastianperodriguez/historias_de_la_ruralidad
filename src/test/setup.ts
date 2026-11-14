@@ -7,3 +7,7 @@ window.HTMLMediaElement.prototype.pause = vi.fn();
 
 // jsdom does not implement window.scrollTo.
 window.scrollTo = vi.fn();
+
+// jsdom does not implement the fullscreen API.
+Element.prototype.requestFullscreen = vi.fn().mockResolvedValue(undefined);
+document.exitFullscreen = vi.fn().mockResolvedValue(undefined);

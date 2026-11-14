@@ -20,7 +20,7 @@ export function TopNav() {
           aria-label="Historias de la Ruralidad Carmelitana — Inicio"
         >
           <img alt="" className="h-8 w-8 flex-shrink-0 object-contain" src="/favicon.svg" />
-          <span className="hidden min-w-0 flex-col xs:flex">
+          <span className="hidden min-w-0 flex-col sm:flex">
             <span className="truncate font-label-sm text-label-sm uppercase tracking-wider text-primary">
               El Carmen de Viboral
             </span>
@@ -31,7 +31,7 @@ export function TopNav() {
         </Link>
 
         <nav
-          className="flex items-center gap-space-md font-label-sm text-label-sm"
+          className="flex items-center gap-space-sm font-label-sm text-label-sm sm:gap-space-md"
           aria-label="Navegación principal"
         >
           {LINKS.map((link) => (
