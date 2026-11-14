@@ -42,6 +42,7 @@ logs/
 
 # Design reference (kept local only)
 propuesta_estilos/
+propuesta_revista/
 
 # Vercel
 .vercel

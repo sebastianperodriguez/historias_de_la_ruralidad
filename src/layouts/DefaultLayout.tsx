@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { BottomNav } from '@/components/layout/BottomNav';
 import { TopHeader } from '@/components/layout/TopHeader';
-import { useTheme } from '@/hooks/useTheme';
 
 const PAGE_TITLES: Array<{ match: RegExp; title: string }> = [
   { match: /^\/la-aurora\/historias\//, title: 'Historias' },
@@ -19,11 +18,10 @@ function pageTitle(pathname: string): string {
 
 export function DefaultLayout() {
   const { pathname } = useLocation();
-  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <TopHeader title={pageTitle(pathname)} theme={theme} onToggleTheme={toggleTheme} />
+      <TopHeader title={pageTitle(pathname)} />
       <main className="flex-1 pb-24 pt-16">
         <Outlet />
       </main>

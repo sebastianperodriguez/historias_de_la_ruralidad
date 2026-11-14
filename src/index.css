@@ -1,71 +1,77 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 /*
- * Design system — extraído de propuesta_estilos (Stitch).
- * Paleta semántica estilo Material 3: los tokens claros viven en @theme
- * y se sobreescriben bajo html.dark. Todas las utilidades de Tailwind
- * resuelven vía var(--color-*), por lo que el tema oscuro no requiere
- * duplicar clases.
+ * Design system — fiel a la identidad de la revista
+ * "La Aurora: Memorias de una vereda construida en comunidad".
+ * Papel cálido, tinta suave, acento turquesa y la paleta de las
+ * ilustraciones de Viviana Serna (celeste, amarillo, rosa, verde).
+ * Los nombres de token se conservan semánticos (surface, primary,
+ * secondary...) para que las utilidades de Tailwind sigan siendo
+ * legibles y consistentes.
  */
 @theme {
-  /* ── Paleta clara ─────────────────────────────────────────────── */
-  --color-background: #fbf9f2;
-  --color-on-background: #1b1c18;
-
-  --color-surface: #fbf9f2;
-  --color-on-surface: #1b1c18;
-  --color-on-surface-variant: #424844;
-  --color-surface-variant: #e4e2dc;
-  --color-surface-dim: #dcdad3;
-  --color-surface-bright: #fbf9f2;
-  --color-surface-tint: #4a6455;
+  /* ── Papel y tinta ─────────────────────────────────────────────── */
+  --color-surface: #eae6e0;
+  --color-on-surface: #2f2b28;
+  --color-on-surface-variant: #6b635c;
+  --color-surface-variant: #e2ddd5;
+  --color-surface-dim: #d8d3ca;
+  --color-surface-bright: #f4f1ec;
 
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f6f4ed;
-  --color-surface-container: #f0eee7;
-  --color-surface-container-high: #eae8e1;
-  --color-surface-container-highest: #e4e2dc;
+  --color-surface-container-low: #f2efe9;
+  --color-surface-container: #ece8e1;
+  --color-surface-container-high: #e4dfd7;
+  --color-surface-container-highest: #d9d3c9;
 
-  --color-primary: #092217;
+  --color-surface-tint: #3d9d95;
+
+  /* ── Turquesa (acento principal, chips de paginación) ─────────── */
+  --color-primary: #3d9d95;
   --color-on-primary: #ffffff;
-  --color-primary-container: #1f382b;
-  --color-on-primary-container: #86a291;
-  --color-primary-fixed: #ccead6;
-  --color-on-primary-fixed: #062014;
-  --color-primary-fixed-dim: #b1cdbb;
-  --color-on-primary-fixed-variant: #334c3e;
+  --color-primary-container: #cfe8e5;
+  --color-on-primary-container: #2e7a74;
+  --color-primary-fixed: #cfe8e5;
+  --color-on-primary-fixed: #1f4a46;
+  --color-primary-fixed-dim: #a9d6d1;
+  --color-on-primary-fixed-variant: #2e7a74;
 
-  --color-secondary: #934b1c;
+  /* ── Rosa (acento de ilustración) ──────────────────────────────── */
+  --color-secondary: #e0577a;
   --color-on-secondary: #ffffff;
-  --color-secondary-container: #ffa26c;
-  --color-on-secondary-container: #783607;
-  --color-secondary-fixed: #ffdbc9;
-  --color-on-secondary-fixed: #331200;
-  --color-secondary-fixed-dim: #ffb68d;
-  --color-on-secondary-fixed-variant: #753404;
+  --color-secondary-container: #f7d4de;
+  --color-on-secondary-container: #b23a58;
+  --color-secondary-fixed: #f7d4de;
+  --color-on-secondary-fixed: #58182a;
+  --color-secondary-fixed-dim: #efa9bd;
+  --color-on-secondary-fixed-variant: #b23a58;
 
-  --color-tertiary: #00212b;
+  /* ── Celeste (acento de ilustración) ──────────────────────────── */
+  --color-tertiary: #57b8dd;
   --color-on-tertiary: #ffffff;
-  --color-tertiary-container: #003846;
-  --color-on-tertiary-container: #74a2b3;
-  --color-tertiary-fixed: #bbeafc;
-  --color-on-tertiary-fixed: #001f28;
-  --color-tertiary-fixed-dim: #9fcee0;
-  --color-on-tertiary-fixed-variant: #1b4c5c;
+  --color-tertiary-container: #d9edf7;
+  --color-on-tertiary-container: #2b7ba3;
+  --color-tertiary-fixed: #d9edf7;
+  --color-on-tertiary-fixed: #173b4c;
+  --color-tertiary-fixed-dim: #a3d2e8;
+  --color-on-tertiary-fixed-variant: #2b7ba3;
 
-  --color-error: #ba1a1a;
+  /* ── Acentos de ilustración ───────────────────────────────────── */
+  --color-sun: #e3c23d;
+  --color-leaf: #4a9e4f;
+
+  /* ── Estado e inversos ────────────────────────────────────────── */
+  --color-error: #b3403a;
   --color-on-error: #ffffff;
-  --color-error-container: #ffdad6;
-  --color-on-error-container: #93000a;
+  --color-error-container: #f6d9d6;
+  --color-on-error-container: #8c2b26;
 
-  --color-outline: #727973;
-  --color-outline-variant: #c2c8c2;
+  --color-outline: #a89f94;
+  --color-outline-variant: #cfc8be;
 
-  --color-inverse-surface: #30312c;
-  --color-inverse-on-surface: #f3f1ea;
-  --color-inverse-primary: #b1cdbb;
+  --color-inverse-surface: #2f2b28;
+  --color-inverse-on-surface: #eae6e0;
+  --color-inverse-primary: #cfe8e5;
 
   /* ── Espaciados ───────────────────────────────────────────────── */
   --spacing-space-xs: 0.25rem;
@@ -79,51 +85,51 @@
   --spacing-gutter-desktop: 2.5rem;
 
   /* ── Tipografía ───────────────────────────────────────────────── */
-  --font-display: 'Newsreader', Georgia, serif;
-  --font-sans: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Fredericka the Great', 'Comic Sans MS', cursive;
+  --font-sans: 'Poppins', 'Segoe UI', system-ui, sans-serif;
 
-  --font-display-lg: 'Newsreader', Georgia, serif;
-  --font-display-lg-mobile: 'Newsreader', Georgia, serif;
-  --font-headline-lg: 'Newsreader', Georgia, serif;
-  --font-headline-lg-mobile: 'Newsreader', Georgia, serif;
-  --font-headline-md: 'Newsreader', Georgia, serif;
-  --font-headline-sm: 'Newsreader', Georgia, serif;
-  --font-quote-lg: 'Newsreader', Georgia, serif;
-  --font-label-sm: 'Source Sans 3', 'Segoe UI', sans-serif;
-  --font-label-md: 'Source Sans 3', 'Segoe UI', sans-serif;
-  --font-body-sm: 'Source Sans 3', 'Segoe UI', sans-serif;
-  --font-body-md: 'Source Sans 3', 'Segoe UI', sans-serif;
-  --font-body-lg: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-display-lg: 'Fredericka the Great', cursive;
+  --font-display-lg-mobile: 'Fredericka the Great', cursive;
+  --font-headline-lg: 'Fredericka the Great', cursive;
+  --font-headline-lg-mobile: 'Fredericka the Great', cursive;
+  --font-headline-md: 'Fredericka the Great', cursive;
+  --font-headline-sm: 'Poppins', sans-serif;
+  --font-quote-lg: 'Poppins', sans-serif;
+  --font-label-sm: 'Poppins', sans-serif;
+  --font-label-md: 'Poppins', sans-serif;
+  --font-body-sm: 'Poppins', sans-serif;
+  --font-body-md: 'Poppins', sans-serif;
+  --font-body-lg: 'Poppins', sans-serif;
 
   --text-display-lg: 3.5rem;
   --text-display-lg--line-height: 4rem;
-  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--letter-spacing: -0.01em;
   --text-display-lg--font-weight: 400;
 
   --text-display-lg-mobile: 2.25rem;
   --text-display-lg-mobile--line-height: 2.75rem;
-  --text-display-lg-mobile--letter-spacing: -0.01em;
+  --text-display-lg-mobile--letter-spacing: 0;
   --text-display-lg-mobile--font-weight: 400;
 
   --text-headline-lg: 2.25rem;
   --text-headline-lg--line-height: 2.75rem;
-  --text-headline-lg--letter-spacing: -0.01em;
-  --text-headline-lg--font-weight: 500;
+  --text-headline-lg--letter-spacing: 0;
+  --text-headline-lg--font-weight: 400;
 
   --text-headline-lg-mobile: 1.75rem;
   --text-headline-lg-mobile--line-height: 2.25rem;
-  --text-headline-lg-mobile--font-weight: 500;
+  --text-headline-lg-mobile--font-weight: 400;
 
   --text-headline-md: 1.75rem;
   --text-headline-md--line-height: 2.25rem;
-  --text-headline-md--font-weight: 500;
+  --text-headline-md--font-weight: 400;
 
   --text-headline-sm: 1.25rem;
   --text-headline-sm--line-height: 1.75rem;
   --text-headline-sm--font-weight: 600;
 
-  --text-quote-lg: 1.5rem;
-  --text-quote-lg--line-height: 2.25rem;
+  --text-quote-lg: 1.25rem;
+  --text-quote-lg--line-height: 2rem;
   --text-quote-lg--font-weight: 400;
 
   --text-label-sm: 0.6875rem;
@@ -137,80 +143,25 @@
   --text-label-md--font-weight: 600;
 
   --text-body-sm: 0.875rem;
-  --text-body-sm--line-height: 1.375rem;
+  --text-body-sm--line-height: 1.5rem;
   --text-body-sm--font-weight: 400;
 
   --text-body-md: 1rem;
-  --text-body-md--line-height: 1.625rem;
+  --text-body-md--line-height: 1.75rem;
   --text-body-md--font-weight: 400;
 
   --text-body-lg: 1.125rem;
-  --text-body-lg--line-height: 1.875rem;
+  --text-body-lg--line-height: 1.9rem;
   --text-body-lg--font-weight: 400;
 
   /* ── Radios y breakpoints ─────────────────────────────────────── */
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1.25rem;
   --breakpoint-xs: 24rem;
 }
 
-/* ── Paleta oscura (code3/code5) ────────────────────────────────── */
-.dark {
-  --color-background: #091610;
-  --color-on-background: #d7e6dc;
-
-  --color-surface: #091610;
-  --color-on-surface: #d7e6dc;
-  --color-on-surface-variant: #bccabb;
-  --color-surface-variant: #2a3831;
-  --color-surface-dim: #091610;
-  --color-surface-bright: #2f3c35;
-  --color-surface-tint: #4de082;
-
-  --color-surface-container-lowest: #05110b;
-  --color-surface-container-low: #111e18;
-  --color-surface-container: #15221c;
-  --color-surface-container-high: #202d26;
-  --color-surface-container-highest: #2a3831;
-
-  --color-primary: #6bfb9a;
-  --color-on-primary: #003919;
-  --color-primary-container: #4ade80;
-  --color-on-primary-container: #005e2d;
-  --color-primary-fixed: #6dfe9c;
-  --color-on-primary-fixed: #00210c;
-  --color-primary-fixed-dim: #4de082;
-  --color-on-primary-fixed-variant: #005227;
-
-  --color-secondary: #7bd0ff;
-  --color-on-secondary: #00354a;
-  --color-secondary-container: #00a6e0;
-  --color-on-secondary-container: #00374d;
-  --color-secondary-fixed: #c4e7ff;
-  --color-on-secondary-fixed: #001e2c;
-  --color-secondary-fixed-dim: #7bd0ff;
-  --color-on-secondary-fixed-variant: #004c69;
-
-  --color-tertiary: #ffdbaf;
-  --color-on-tertiary: #452b00;
-  --color-tertiary-container: #eebc7a;
-  --color-on-tertiary-container: #6e4a12;
-  --color-tertiary-fixed: #ffddb4;
-  --color-on-tertiary-fixed: #291800;
-  --color-tertiary-fixed-dim: #f0be7b;
-  --color-on-tertiary-fixed-variant: #624007;
-
-  --color-error: #ffb4ab;
-  --color-on-error: #690005;
-  --color-error-container: #93000a;
-  --color-on-error-container: #ffdad6;
-
-  --color-outline: #869486;
-  --color-outline-variant: #3d4a3e;
-
-  --color-inverse-surface: #d7e6dc;
-  --color-inverse-on-surface: #26332d;
-  --color-inverse-primary: #006d36;
+@utility rounded {
+  border-radius: 0.5rem;
 }
 
 @utility pt-safe {
@@ -238,14 +189,7 @@
   }
 
   ::selection {
-    background-color: var(--color-secondary-fixed);
-    color: var(--color-on-secondary-fixed);
-  }
-}
-
-/* Radio base del diseño (Stitch usa 0.125rem para `rounded` base). */
-@layer utilities {
-  .rounded {
-    border-radius: 0.125rem;
+    background-color: var(--color-primary-container);
+    color: var(--color-on-primary-container);
   }
 }
