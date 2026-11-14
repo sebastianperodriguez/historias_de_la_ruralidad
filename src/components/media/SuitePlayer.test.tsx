@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { SuitePlayer } from '@/components/media/SuitePlayer';
 import { suite } from '@/data/suite';
 
@@ -9,26 +9,23 @@ describe('SuitePlayer', () => {
     render(<SuitePlayer />);
     expect(screen.getByText(suite.titulo)).toBeInTheDocument();
     expect(screen.getByText(suite.compositor)).toBeInTheDocument();
-    expect(screen.getByText('Pista 1')).toBeInTheDocument();
-    expect(screen.getByText('Pista 3')).toBeInTheDocument();
+    expect(screen.getAllByText('Aurora').length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByText('Berceuse')).toBeInTheDocument();
+    expect(screen.getByText('Cantando Números')).toBeInTheDocument();
     expect(screen.getByText('3 pistas')).toBeInTheDocument();
   });
 
-  it('shows the pending message when no tracks have sources', async () => {
-    const onMissingTrack = vi.fn();
-    render(<SuitePlayer onMissingTrack={onMissingTrack} />);
-    await userEvent.click(screen.getByText(suite.pistaMessage));
-    expect(onMissingTrack).toHaveBeenCalledTimes(1);
+  it('renders an enabled audio player for the selected track', () => {
+    render(<SuitePlayer />);
+    expect(screen.getByRole('button', { name: 'Reproducir audio' })).toBeEnabled();
+    expect(screen.queryByRole('button', { name: 'Pausar audio' })).not.toBeInTheDocument();
   });
 
   it('selects another track from the playlist', async () => {
     render(<SuitePlayer />);
-    const pista3 = screen.getByRole('button', { name: /Pista 3/ });
+    const pista3 = screen.getByRole('button', { name: /Cantando Números/ });
     await userEvent.click(pista3);
     expect(pista3).toHaveAttribute('aria-current', 'true');
-    expect(screen.getByRole('button', { name: /Pista 1/ })).toHaveAttribute(
-      'aria-current',
-      'false',
-    );
+    expect(screen.getByRole('button', { name: /Aurora/ })).toHaveAttribute('aria-current', 'false');
   });
 });

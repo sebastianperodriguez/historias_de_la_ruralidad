@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getRevistaPageUrl, getRevistaPageUrls } from '@/lib/revista-pages';
-import { Icon } from '@/components/ui/Icon';
 
 const SWIPE_THRESHOLD_PX = 48;
 
@@ -89,7 +88,9 @@ export function MagazineViewer({ pages: pagesProp }: MagazineViewerProps) {
           aria-label="Página anterior"
           className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-on-surface shadow backdrop-blur-sm transition-transform active:scale-90 disabled:opacity-30"
         >
-          <Icon name="chevron_left" size={24} />
+          <span aria-hidden="true" className="text-3xl font-light leading-none text-on-surface">
+            ‹
+          </span>
         </button>
         <button
           type="button"
@@ -98,7 +99,9 @@ export function MagazineViewer({ pages: pagesProp }: MagazineViewerProps) {
           aria-label="Página siguiente"
           className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-on-surface shadow backdrop-blur-sm transition-transform active:scale-90 disabled:opacity-30"
         >
-          <Icon name="chevron_right" size={24} />
+          <span aria-hidden="true" className="text-3xl font-light leading-none text-on-surface">
+            ›
+          </span>
         </button>
 
         <div className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-surface/90 px-3 py-1 font-label-sm text-label-sm text-on-surface shadow backdrop-blur-sm">
@@ -114,7 +117,6 @@ export function MagazineViewer({ pages: pagesProp }: MagazineViewerProps) {
           aria-expanded={thumbnailsOpen}
           className="flex items-center gap-1 font-label-md text-label-md text-primary hover:underline"
         >
-          <Icon name="grid_view" size={16} />
           <span>{thumbnailsOpen ? 'Ocultar miniaturas' : 'Ver miniaturas'}</span>
         </button>
         <span className="font-label-sm text-label-sm text-outline">

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Vereda } from '@/data/veredas';
 import { Badge } from '@/components/ui/Badge';
-import { Icon } from '@/components/ui/Icon';
 
 type VeredaCardProps = {
   vereda: Vereda;
@@ -20,7 +19,6 @@ export function VeredaCard({ vereda }: VeredaCardProps) {
           />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-primary">
-            <Icon name="menu_book" size={40} />
             <span className="font-label-md text-label-md uppercase tracking-wider">
               Próximamente
             </span>
@@ -44,10 +42,9 @@ export function VeredaCard({ vereda }: VeredaCardProps) {
       </p>
 
       <div className="flex items-center justify-between pt-space-xs">
-        <div className="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
-          <Icon name="auto_stories" size={16} className="text-primary" />
-          <span>{vereda.available ? 'Publicación completa' : 'Cuaderno en curso'}</span>
-        </div>
+        <span className="font-label-sm text-label-sm text-on-surface-variant">
+          {vereda.available ? 'Publicación completa' : 'Cuaderno en curso'}
+        </span>
         <Link
           to={vereda.available ? '/la-aurora' : '/la-honda'}
           aria-label={
@@ -58,7 +55,7 @@ export function VeredaCard({ vereda }: VeredaCardProps) {
           className="flex h-10 items-center gap-1 rounded-full bg-primary px-space-md font-label-md text-label-md text-on-primary shadow-sm transition-transform active:scale-95"
         >
           <span>{vereda.available ? 'Leer investigación' : 'Próximamente'}</span>
-          <Icon name="arrow_forward" size={16} />
+          <span aria-hidden="true">›</span>
         </Link>
       </div>
     </article>

@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { aurora } from '@/data/aurora';
 import { revista } from '@/data/revista';
 import { Badge } from '@/components/ui/Badge';
-import { Icon } from '@/components/ui/Icon';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
 const hitoAccentClasses = {
@@ -48,10 +47,24 @@ export function AuroraPage() {
         </div>
       </section>
 
+      {/* Ilustración de la vereda */}
+      <section className="px-margin pt-space-md">
+        <figure className="overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm">
+          <img
+            src={aurora.hero.src}
+            alt={aurora.hero.alt}
+            loading="lazy"
+            className="h-56 w-full object-cover"
+          />
+          <figcaption className="bg-surface-container-low p-space-sm font-label-sm text-label-sm text-on-surface-variant">
+            {aurora.hero.pie}
+          </figcaption>
+        </figure>
+      </section>
+
       {/* Origen del nombre */}
       <article className="flex flex-col gap-space-md px-margin py-space-md">
         <div className="flex items-center gap-space-xs text-primary">
-          <Icon name="menu_book" size={16} />
           <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider">
             {aurora.cronica.kicker}
           </span>
@@ -75,11 +88,6 @@ export function AuroraPage() {
       {/* Testimonio real */}
       <section className="px-margin my-space-md">
         <div className="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm">
-          <Icon
-            name="format_quote"
-            size={64}
-            className="pointer-events-none absolute -bottom-2 -right-2 select-none text-primary/15"
-          />
           <div className="relative z-10 flex flex-col gap-space-sm">
             <span className="font-label-sm text-label-sm font-semibold uppercase tracking-widest text-primary">
               {aurora.testimonial.kicker}
@@ -107,7 +115,6 @@ export function AuroraPage() {
       {/* Acueducto comunitario */}
       <section className="flex flex-col gap-space-md px-margin py-space-sm">
         <div className="flex items-center gap-space-xs text-primary">
-          <Icon name="water_drop" size={18} className="text-tertiary" />
           <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider">
             {aurora.acueducto.kicker}
           </span>
@@ -197,7 +204,6 @@ export function AuroraPage() {
                   </span>
                 </div>
               </div>
-              <Icon name="arrow_forward" size={18} className="flex-shrink-0 text-primary" />
             </Link>
           ))}
         </div>
@@ -220,9 +226,7 @@ export function AuroraPage() {
               {aurora.siguiente.subtitle}
             </span>
           </div>
-          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm">
-            <Icon name="arrow_forward" size={20} />
-          </div>
+          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm"></div>
         </Link>
       </section>
     </>

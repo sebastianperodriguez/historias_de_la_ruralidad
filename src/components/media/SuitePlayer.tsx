@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { AudioPlayer } from '@/components/media/AudioPlayer';
-import { Icon } from '@/components/ui/Icon';
 import { suite } from '@/data/suite';
 
 type SuitePlayerProps = {
@@ -16,20 +15,15 @@ export function SuitePlayer({ onMissingTrack }: SuitePlayerProps) {
   return (
     <div className="flex flex-col gap-space-sm rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
       <div className="flex items-center justify-between gap-space-sm">
-        <div className="flex min-w-0 items-center gap-2">
-          <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary text-on-primary">
-            <Icon name="music_note" size={18} />
+        <div className="flex min-w-0 flex-col">
+          <span className="truncate font-label-md text-label-md font-semibold text-on-surface">
+            {suite.titulo}
           </span>
-          <div className="flex min-w-0 flex-col">
-            <span className="truncate font-label-md text-label-md font-semibold text-on-surface">
-              {suite.titulo}
-            </span>
-            <span className="truncate font-label-sm text-label-sm text-on-surface-variant">
-              {suite.compositor}
-            </span>
-          </div>
+          <span className="truncate font-label-sm text-label-sm text-on-surface-variant">
+            {suite.compositor}
+          </span>
         </div>
-        <span className="rounded bg-primary-container px-2 py-0.5 font-label-sm text-label-sm text-on-primary-container">
+        <span className="rounded-full bg-primary-container px-2 py-0.5 font-label-sm text-label-sm text-on-primary-container">
           {suite.pistas.length} pistas
         </span>
       </div>
@@ -50,10 +44,9 @@ export function SuitePlayer({ onMissingTrack }: SuitePlayerProps) {
               }`}
             >
               <span className="flex min-w-0 items-center gap-2">
-                <Icon
-                  name={isActive ? 'play_circle' : 'radio_button_unchecked'}
-                  size={18}
-                  className="flex-shrink-0"
+                <span
+                  aria-hidden="true"
+                  className={`flex h-2 w-2 flex-shrink-0 rounded-full ${isActive ? 'bg-primary' : 'bg-outline'}`}
                 />
                 <span className="truncate">{p.titulo}</span>
               </span>
@@ -70,7 +63,6 @@ export function SuitePlayer({ onMissingTrack }: SuitePlayerProps) {
           key={pista?.numero}
           title={pista?.titulo ?? suite.titulo}
           subtitle={`${suite.titulo} • ${suite.compositor}`}
-          avatarIcon="graphic_eq"
           src={pista?.src}
         />
       ) : (
@@ -79,7 +71,6 @@ export function SuitePlayer({ onMissingTrack }: SuitePlayerProps) {
           onClick={onMissingTrack}
           className="flex items-center gap-2 rounded bg-surface-container px-3 py-2 font-label-md text-label-md text-on-surface-variant"
         >
-          <Icon name="hourglass_empty" size={18} />
           <span>{suite.pistaMessage}</span>
         </button>
       )}

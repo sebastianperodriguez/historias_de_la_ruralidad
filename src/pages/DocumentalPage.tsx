@@ -2,16 +2,13 @@ import { Link } from 'react-router-dom';
 import { proyecto } from '@/data/proyecto';
 import { revista } from '@/data/revista';
 import { Badge } from '@/components/ui/Badge';
-import { Icon } from '@/components/ui/Icon';
 
 export function DocumentalPage() {
   return (
     <>
       <section className="flex flex-col gap-space-sm bg-surface-container-low px-margin pb-space-lg pt-space-md">
         <div className="flex items-center justify-between">
-          <Badge variant="primary" icon="smart_display">
-            Proyecto Audiovisual
-          </Badge>
+          <Badge variant="primary">Proyecto Audiovisual</Badge>
         </div>
         <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-primary">
           Documental {revista.titulo}
@@ -42,7 +39,6 @@ export function DocumentalPage() {
               rel="noreferrer"
               className="flex items-center gap-1 font-label-md text-label-md text-primary hover:underline"
             >
-              <Icon name="open_in_new" size={16} />
               Ver en YouTube
             </a>
           </div>
@@ -65,9 +61,7 @@ export function DocumentalPage() {
               La memoria oral, fotografías e ilustraciones del proyecto
             </span>
           </div>
-          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm">
-            <Icon name="auto_stories" size={20} />
-          </div>
+          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm"></div>
         </Link>
       </section>
     </>

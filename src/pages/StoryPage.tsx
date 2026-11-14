@@ -3,7 +3,6 @@ import { getCapituloBySlug, revista } from '@/data/revista';
 import type { CapituloBloque } from '@/data/revista';
 import { getRevistaPageUrl } from '@/lib/revista-pages';
 import { Badge } from '@/components/ui/Badge';
-import { Icon } from '@/components/ui/Icon';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
 function Bloque({ bloque }: { bloque: CapituloBloque }) {
@@ -101,7 +100,6 @@ export function StoryPage() {
             className="flex flex-1 items-center gap-1 rounded-xl bg-surface-container-lowest p-space-sm shadow-sm"
             aria-label={`Capítulo anterior: ${anterior.titulo}`}
           >
-            <Icon name="arrow_back" size={18} className="flex-shrink-0 text-primary" />
             <span className="truncate font-label-md text-label-md text-on-surface">
               {anterior.titulo}
             </span>
@@ -118,7 +116,6 @@ export function StoryPage() {
             <span className="truncate font-label-md text-label-md text-on-surface">
               {siguiente.titulo}
             </span>
-            <Icon name="arrow_forward" size={18} className="flex-shrink-0 text-primary" />
           </Link>
         ) : (
           <span className="flex-1" />

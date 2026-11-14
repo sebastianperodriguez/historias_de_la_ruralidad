@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import type { ChangeEvent, ReactEventHandler } from 'react';
-import { Icon } from '@/components/ui/Icon';
 import { formatAudioTime } from '@/lib/format';
 
 /*
@@ -15,8 +14,6 @@ type AudioPlayerProps = {
   src?: string;
   transcript?: string;
   avatarInitials?: string;
-  /** Ícono de Material Symbols para el círculo de avatar (alternativa a las iniciales). */
-  avatarIcon?: string;
 };
 
 export function AudioPlayer({
@@ -25,7 +22,6 @@ export function AudioPlayer({
   src,
   transcript,
   avatarInitials,
-  avatarIcon,
 }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -76,12 +72,8 @@ export function AudioPlayer({
     <div className="flex flex-col gap-space-sm">
       <div className="flex gap-space-sm items-center">
         {avatarInitials ? (
-          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-secondary text-on-secondary font-headline-sm text-headline-sm">
+          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm">
             {avatarInitials}
-          </div>
-        ) : avatarIcon ? (
-          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-secondary-fixed text-on-secondary-fixed">
-            <Icon name={avatarIcon} size={20} />
           </div>
         ) : null}
         <div className="flex min-w-0 flex-col">
@@ -103,9 +95,19 @@ export function AudioPlayer({
             onClick={togglePlay}
             disabled={!src}
             aria-label={playing ? 'Pausar audio' : 'Reproducir audio'}
-            className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-secondary text-on-secondary shadow transition-transform active:scale-90 disabled:cursor-not-allowed disabled:opacity-40"
+            className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-primary text-on-primary shadow transition-transform active:scale-90 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            <Icon name={playing ? 'pause' : 'play_arrow'} size={24} />
+            {playing ? (
+              <span className="flex h-4 items-center gap-[3px]" aria-hidden="true">
+                <span className="h-4 w-[3px] rounded-sm bg-current" />
+                <span className="h-4 w-[3px] rounded-sm bg-current" />
+              </span>
+            ) : (
+              <span
+                className="ml-0.5 h-0 w-0 border-y-[7px] border-l-[11px] border-y-transparent border-l-current"
+                aria-hidden="true"
+              />
+            )}
           </button>
 
           <div
@@ -151,8 +153,7 @@ export function AudioPlayer({
               className="inline-flex items-center gap-1 self-start pt-1 font-label-md text-label-md text-secondary hover:underline"
               aria-expanded={transcriptOpen}
             >
-              <Icon name="subtitles" size={15} />
-              <span>
+              <span className="font-semibold">
                 {transcriptOpen ? 'Ocultar transcripción' : 'Leer transcripción del relato'}
               </span>
             </button>

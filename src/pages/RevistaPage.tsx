@@ -1,7 +1,6 @@
 import { revista } from '@/data/revista';
 import { MagazineViewer } from '@/components/media/MagazineViewer';
 import { Badge } from '@/components/ui/Badge';
-import { Icon } from '@/components/ui/Icon';
 import { Toast } from '@/components/ui/Toast';
 import { useToast } from '@/hooks/useToast';
 
@@ -13,9 +12,7 @@ export function RevistaPage() {
       {/* Ficha de la publicación */}
       <section className="flex flex-col gap-space-sm bg-surface-container-low px-margin pb-space-lg pt-space-md">
         <div className="flex items-center justify-between">
-          <Badge variant="primary" icon="auto_stories">
-            Revista digital
-          </Badge>
+          <Badge variant="primary">Revista digital</Badge>
           <span className="font-label-sm text-label-sm uppercase tracking-wider text-outline">
             {revista.totalPaginas} páginas
           </span>
@@ -49,7 +46,6 @@ export function RevistaPage() {
           onClick={() => showToast(revista.pdfMessage, 'download_for_offline')}
           className="flex h-11 w-full items-center justify-center gap-space-xs rounded-full bg-primary font-label-md text-label-md uppercase tracking-wider text-on-primary shadow transition-transform hover:bg-on-primary-container active:scale-[0.99]"
         >
-          <Icon name="download_for_offline" size={18} />
           <span>Descargar revista (PDF)</span>
         </button>
       </section>
