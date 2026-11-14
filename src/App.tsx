@@ -3,8 +3,6 @@ import { DefaultLayout } from '@/layouts/DefaultLayout';
 import { HomePage } from '@/pages/HomePage';
 import { AuroraPage } from '@/pages/AuroraPage';
 import { StoryPage } from '@/pages/StoryPage';
-import { RevistaPage } from '@/pages/RevistaPage';
-import { DocumentalPage } from '@/pages/DocumentalPage';
 import { LaHondaPage } from '@/pages/LaHondaPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
@@ -15,8 +13,6 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="/la-aurora" element={<AuroraPage />} />
         <Route path="/la-aurora/historias/:slug" element={<StoryPage />} />
-        <Route path="/revista" element={<RevistaPage />} />
-        <Route path="/documental" element={<DocumentalPage />} />
         <Route path="/la-honda" element={<LaHondaPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>

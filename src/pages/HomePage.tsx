@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
-import { veredas } from '@/data/veredas';
+import { contacto } from '@/data/contacto';
 import { proyecto } from '@/data/proyecto';
-import { SuitePlayer } from '@/components/media/SuitePlayer';
 import { Badge } from '@/components/ui/Badge';
 import { FooterEditorial } from '@/components/ui/FooterEditorial';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { StatCard } from '@/components/ui/StatCard';
 import { Toast } from '@/components/ui/Toast';
 import { useToast } from '@/hooks/useToast';
-import { VeredaCard } from '@/components/ui/VeredaCard';
 
 export function HomePage() {
   const { toast, showToast } = useToast();
@@ -33,40 +30,18 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Ilustración del proyecto */}
+      {/* Imagen de portada */}
       <section className="px-margin pb-space-xl">
-        <div className="overflow-hidden rounded-xl bg-surface-container-lowest shadow-md">
+        <figure className="mx-auto w-full max-w-md overflow-hidden rounded-xl bg-surface-container-lowest shadow-md">
           <img
-            className="w-full object-cover"
+            className="aspect-[4/3] w-full object-cover"
             src={proyecto.hero.image.src}
             alt={proyecto.hero.image.alt}
           />
-          <div className="bg-surface-container-low p-space-md">
-            <span className="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
-              {proyecto.hero.image.pie}
-            </span>
-          </div>
-        </div>
+        </figure>
       </section>
 
-      {/* El proyecto */}
-      <section className="px-margin pb-space-xl">
-        <div className="flex flex-col gap-space-md rounded-xl bg-surface-container p-space-md">
-          <div className="flex items-center gap-space-xs text-primary">
-            <h3 className="font-headline-sm text-headline-sm">El proyecto</h3>
-          </div>
-          <p className="font-body-md text-body-md leading-relaxed text-on-surface">
-            {proyecto.metodologia}
-          </p>
-          <div className="grid grid-cols-3 gap-space-xs">
-            {proyecto.stats.map((stat) => (
-              <StatCard key={stat.label} value={stat.value} label={stat.label} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tarjetas de acceso */}
+      {/* Primeros pasos */}
       <section className="flex flex-col gap-space-md px-margin pb-space-xl">
         <SectionHeader kicker={proyecto.accesos.kicker} title={proyecto.accesos.title} />
         {proyecto.accesos.cards.map((card) => (
@@ -99,77 +74,6 @@ export function HomePage() {
         ))}
       </section>
 
-      {/* Cuadernos de campo */}
-      <section className="flex flex-col gap-space-md px-margin pb-space-xl">
-        <SectionHeader
-          kicker={proyecto.secciones.veredas.kicker}
-          title={proyecto.secciones.veredas.title}
-          trailing={proyecto.secciones.veredas.trailing}
-        />
-        {veredas.map((vereda) => (
-          <VeredaCard key={vereda.slug} vereda={vereda} />
-        ))}
-      </section>
-
-      {/* Banda sonora */}
-      <section className="flex flex-col gap-space-md px-margin pb-space-xl">
-        <SectionHeader
-          kicker={proyecto.secciones.suite.kicker}
-          title={proyecto.secciones.suite.title}
-        />
-        <SuitePlayer />
-      </section>
-
-      {/* Documental */}
-      <section className="px-margin pb-space-xl">
-        <div className="overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm">
-          <img
-            src={proyecto.secciones.documental.image.src}
-            alt={proyecto.secciones.documental.image.alt}
-            loading="lazy"
-            className="h-40 w-full object-cover"
-          />
-          <div className="flex flex-col gap-space-sm p-space-md">
-            <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-primary">
-              {proyecto.secciones.documental.kicker}
-            </span>
-            <h3 className="font-headline-sm text-headline-sm text-on-surface">
-              {proyecto.secciones.documental.title}
-            </h3>
-            <p className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
-              {proyecto.secciones.documental.description}
-            </p>
-            <Link
-              to="/documental"
-              className="flex h-11 items-center justify-center rounded-full bg-primary font-label-md text-label-md font-semibold text-on-primary shadow transition-transform active:scale-95"
-            >
-              {proyecto.secciones.documental.cta}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* La investigadora */}
-      <section className="px-margin pb-space-xl">
-        <div className="flex flex-col gap-space-sm rounded-xl border border-primary/30 bg-primary-container/40 p-space-md">
-          <span className="font-label-sm text-label-sm font-semibold uppercase tracking-widest text-primary">
-            {proyecto.investigadora.kicker}
-          </span>
-          <h3 className="font-headline-sm text-headline-sm text-on-surface">
-            {proyecto.investigadora.nombre}
-          </h3>
-          <p className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
-            {proyecto.investigadora.bio}
-          </p>
-          <Link
-            to="/revista"
-            className="self-start font-label-md text-label-md font-semibold text-primary hover:underline"
-          >
-            {proyecto.investigadora.enRevista} ›
-          </Link>
-        </div>
-      </section>
-
       {/* Llamado comunitario */}
       <section id={proyecto.cta.id} className="scroll-mt-24 px-margin pb-space-xl">
         <div className="relative flex flex-col gap-space-md overflow-hidden rounded-xl bg-primary p-space-lg shadow-md">
@@ -188,21 +92,66 @@ export function HomePage() {
               {proyecto.cta.description}
             </p>
           </div>
-          <div className="flex flex-col gap-space-sm pt-space-xs sm:flex-row">
+          <div className="flex flex-col gap-space-sm pt-space-xs sm:flex-row sm:justify-center">
             <button
               type="button"
               onClick={() => showToast(proyecto.cta.contributeMessage)}
-              className="flex h-11 items-center justify-center rounded-full bg-surface font-label-md text-label-md font-semibold text-primary shadow transition-transform active:scale-95"
+              className="flex h-12 w-full items-center justify-center rounded-full bg-surface px-6 font-label-md text-label-md font-semibold text-primary shadow transition-transform active:scale-95 sm:w-auto sm:min-w-56"
             >
               <span>{proyecto.cta.contributeLabel}</span>
             </button>
-            <button
-              type="button"
-              onClick={() => showToast(proyecto.cta.contactMessage)}
-              className="flex h-11 items-center justify-center rounded-full border border-on-primary/40 font-label-md text-label-md text-on-primary transition-colors hover:bg-on-primary/10"
+            <Link
+              to="/#contacto"
+              className="flex h-12 w-full items-center justify-center rounded-full border border-on-primary/40 px-6 font-label-md text-label-md text-on-primary transition-colors hover:bg-on-primary/10 sm:w-auto sm:min-w-56"
             >
               <span>{proyecto.cta.contactLabel}</span>
-            </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Contacto */}
+      <section id="contacto" className="scroll-mt-24 px-margin pb-space-xl">
+        <div className="flex flex-col gap-space-md rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
+          <div className="flex flex-col gap-1">
+            <span className="font-label-sm text-label-sm font-semibold uppercase tracking-widest text-primary">
+              {contacto.kicker}
+            </span>
+            <h3 className="font-headline-sm text-headline-sm text-on-surface">{contacto.title}</h3>
+            <p className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
+              {contacto.description}
+            </p>
+          </div>
+          <div className="grid gap-space-sm sm:grid-cols-2">
+            {contacto.personas.map((persona) => (
+              <div
+                key={persona.nombre}
+                className="flex flex-col gap-1 rounded-xl bg-surface-container-low p-space-md"
+              >
+                <span className="font-label-md text-label-md font-semibold text-on-surface">
+                  {persona.nombre}
+                </span>
+                <span className="font-label-sm text-label-sm text-on-surface-variant">
+                  {persona.rol}
+                </span>
+                <a
+                  href={`mailto:${persona.email}`}
+                  className="font-label-md text-label-md text-primary hover:underline"
+                >
+                  {persona.email}
+                </a>
+                {persona.sitio && (
+                  <a
+                    href={persona.sitio.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-label-md text-label-md text-primary hover:underline"
+                  >
+                    {persona.sitio.label}
+                  </a>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>

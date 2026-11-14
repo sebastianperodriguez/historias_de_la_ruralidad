@@ -1,4 +1,7 @@
-import ilustracionAuroraUrl from '@/assets/proyecto/ilustracion-aurora.webp';
+import tallerFotobordadoUrl from '@/assets/proyecto/taller-fotobordado.webp';
+import tallerDetalleUrl from '@/assets/proyecto/taller-detalle.webp';
+import documentalPaisajeUrl from '@/assets/proyecto/documental-paisaje.webp';
+import { revista } from '@/data/revista';
 
 export type AuroraHito = {
   title: string;
@@ -6,20 +9,63 @@ export type AuroraHito = {
   accent: 'primary' | 'secondary' | 'tertiary';
 };
 
+export type AuroraActividad = {
+  title: string;
+  description: string;
+  href: string;
+  image: { src: string; alt: string };
+};
+
 export const aurora = {
   cuaderno: 'Cuaderno de Campo No. 01',
   ficha: 'Ficha Etnográfica',
   subtitle: 'Memorias de una vereda construida en comunidad',
-  hero: {
-    src: ilustracionAuroraUrl,
-    alt: 'Ilustración de Viviana Serna: paisaje de lomas y terrazas de cultivo de la vereda La Aurora',
-    pie: 'Ilustración de Viviana Serna Arbeláez — obra del proyecto',
-  },
   fichaStats: [
     { label: 'Entrevistas', value: '4', note: 'Historias orales' },
     { label: 'Talleres', value: '4', note: 'Con la comunidad' },
     { label: 'Capítulos', value: '6', note: 'Revista La Aurora' },
   ],
+  actividades: {
+    kicker: 'Actividades Realizadas',
+    title: 'El trabajo de campo',
+    items: [
+      {
+        title: 'El Documental',
+        description: 'El registro audiovisual completo del proyecto.',
+        href: '#documental',
+        image: {
+          src: documentalPaisajeUrl,
+          alt: 'Atardecer sobre el valle de El Carmen de Viboral',
+        },
+      },
+      {
+        title: 'La Revista',
+        description: `${revista.totalPaginas} páginas de memoria oral, fotografía e ilustración.`,
+        href: '#revista',
+        image: {
+          src: tallerFotobordadoUrl,
+          alt: 'Taller de fotobordado con mujeres campesinas',
+        },
+      },
+      {
+        title: 'El fotobordado',
+        description: 'La comunidad bordó sus recuerdos sobre las fotografías de la vereda.',
+        href: '#suite',
+        image: {
+          src: tallerDetalleUrl,
+          alt: 'Detalle de un fotobordado bordado sobre una fotografía',
+        },
+      },
+    ] satisfies AuroraActividad[],
+  },
+  documental: {
+    kicker: 'Proyecto Audiovisual',
+    title: 'El Documental',
+    description:
+      'El registro audiovisual del proyecto, con tomas aéreas de Fabián Rendón Morales y la Suite para la Aurora de Sebastián Pérez Rodríguez.',
+    youtubeUrl: 'https://www.youtube.com/watch?v=b9piVmaFnns',
+    youtubeEmbedUrl: 'https://www.youtube.com/embed/b9piVmaFnns',
+  },
   cronica: {
     kicker: 'Origen del nombre',
     title: 'Una casa azul al borde del camino',

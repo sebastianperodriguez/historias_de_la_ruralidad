@@ -16,20 +16,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "e2e": "playwright test",
-    "e2e:ui": "playwright test --ui",
-    "prepare": "husky",
     "magazine:convert": "node scripts/convert-magazine.mjs",
     "proyecto:convert": "node scripts/convert-proyecto.mjs"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,css,md,html}": [
-      "prettier --write"
-    ]
   },
   "dependencies": {
     "react": "^19.3.1",
@@ -37,15 +25,11 @@
     "react-router-dom": "^7.18.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.2.4",
-    "@commitlint/config-conventional": "^21.2.4",
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "^1.65.1",
     "@tailwindcss/vite": "^4.3.5",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.10",
-    "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",
@@ -55,11 +39,9 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^17.14.0",
-    "husky": "^9.1.7",
     "jsdom": "^31.0.1",
-    "lint-staged": "^17.6.0",
     "prettier": "^3.10.1",
-    "sharp": "^0.35.5",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4.3.5",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.2",

@@ -3,7 +3,6 @@ import { Link, NavLink } from 'react-router-dom';
 const LINKS = [
   { to: '/', label: 'Inicio', end: true },
   { to: '/la-aurora', label: 'La Aurora' },
-  { to: '/revista', label: 'Revista' },
   { to: '/la-honda', label: 'La Honda' },
 ] as const;
 

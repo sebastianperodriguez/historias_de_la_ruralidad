@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import { HomePage } from '@/pages/HomePage';
+import { contacto } from '@/data/contacto';
 import { proyecto } from '@/data/proyecto';
 
 function renderPage() {
@@ -19,18 +20,21 @@ describe('HomePage', () => {
     expect(screen.getByText('Memorias de la ruralidad carmelitana')).toBeInTheDocument();
   });
 
-  it('renders real project stats', () => {
+  it('renders the methodology and stats on the aurora page instead', () => {
     renderPage();
-    expect(screen.getAllByText('4').length).toBeGreaterThanOrEqual(2);
-    expect(screen.getByText('Entrevistas')).toBeInTheDocument();
-    expect(screen.getByText('Talleres')).toBeInTheDocument();
-    expect(screen.getByText('Páginas')).toBeInTheDocument();
+    expect(screen.queryByText('Entrevistas')).not.toBeInTheDocument();
+    expect(screen.queryByText('Talleres')).not.toBeInTheDocument();
   });
 
-  it('shows the researcher section', () => {
+  it('shows the contact section with the project team', () => {
     renderPage();
-    expect(screen.getByText(proyecto.investigadora.nombre)).toBeInTheDocument();
-    expect(screen.getByText(proyecto.investigadora.kicker)).toBeInTheDocument();
+    expect(screen.getByText(contacto.title)).toBeInTheDocument();
+    for (const persona of contacto.personas) {
+      expect(screen.getByText(persona.nombre)).toBeInTheDocument();
+      expect(screen.getByText(persona.rol)).toBeInTheDocument();
+      const emailLink = screen.getByRole('link', { name: persona.email });
+      expect(emailLink).toHaveAttribute('href', `mailto:${persona.email}`);
+    }
   });
 
   it('renders access cards to the La Aurora content', () => {
@@ -40,13 +44,10 @@ describe('HomePage', () => {
     }
   });
 
-  it('links the magazine and the documentary', () => {
+  it('links the contact button to the contact section', () => {
     renderPage();
-    expect(screen.getAllByRole('link', { name: /Abrir la revista/ }).length).toBeGreaterThan(0);
-    expect(screen.getByRole('link', { name: /Ver documental/ })).toHaveAttribute(
-      'href',
-      '/documental',
-    );
+    const contactLink = screen.getByRole('link', { name: proyecto.cta.contactLabel });
+    expect(contactLink).toHaveAttribute('href', '/#contacto');
   });
 
   it('renders the community call-to-action with the contact anchor', () => {

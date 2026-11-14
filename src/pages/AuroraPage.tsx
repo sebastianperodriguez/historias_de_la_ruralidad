@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 import { aurora } from '@/data/aurora';
 import { revista } from '@/data/revista';
+import { MagazineViewer } from '@/components/media/MagazineViewer';
+import { SuitePlayer } from '@/components/media/SuitePlayer';
 import { Badge } from '@/components/ui/Badge';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { Toast } from '@/components/ui/Toast';
+import { useToast } from '@/hooks/useToast';
 
 const hitoAccentClasses = {
   primary: 'bg-primary text-on-primary',
@@ -11,6 +15,8 @@ const hitoAccentClasses = {
 } as const;
 
 export function AuroraPage() {
+  const { toast, showToast } = useToast();
+
   return (
     <>
       {/* Ficha del cuaderno de campo */}
@@ -47,28 +53,114 @@ export function AuroraPage() {
         </div>
       </section>
 
-      {/* Ilustración de la vereda */}
-      <section className="px-margin pt-space-md">
-        <figure className="overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm">
-          <img
-            src={aurora.hero.src}
-            alt={aurora.hero.alt}
-            loading="lazy"
-            className="h-56 w-full object-cover"
-          />
-          <figcaption className="bg-surface-container-low p-space-sm font-label-sm text-label-sm text-on-surface-variant">
-            {aurora.hero.pie}
-          </figcaption>
-        </figure>
+      {/* Actividades realizadas */}
+      <section className="flex flex-col gap-space-md px-margin py-space-md">
+        <SectionHeader kicker={aurora.actividades.kicker} title={aurora.actividades.title} />
+        {aurora.actividades.items.map((actividad) => (
+          <a
+            key={actividad.title}
+            href={actividad.href}
+            className="flex items-stretch gap-space-sm overflow-hidden rounded-xl bg-surface-container-lowest p-2 shadow-sm transition-colors hover:bg-surface-container"
+          >
+            <img
+              src={actividad.image.src}
+              alt={actividad.image.alt}
+              loading="lazy"
+              className="h-24 w-28 flex-shrink-0 rounded-lg object-cover"
+            />
+            <div className="flex min-w-0 flex-col justify-center gap-0.5">
+              <span className="font-label-md text-label-md font-semibold text-on-surface">
+                {actividad.title}
+              </span>
+              <span className="line-clamp-2 font-body-sm text-body-sm text-on-surface-variant">
+                {actividad.description}
+              </span>
+              <span className="font-label-sm text-label-sm font-semibold text-primary">
+                Ver aquí ›
+              </span>
+            </div>
+          </a>
+        ))}
+      </section>
+
+      {/* Documental */}
+      <section id="documental" className="scroll-mt-24 px-margin pb-space-xl">
+        <div className="flex flex-col gap-space-sm rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
+          <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-primary">
+            {aurora.documental.kicker}
+          </span>
+          <h3 className="font-headline-sm text-headline-sm text-on-surface">
+            {aurora.documental.title}
+          </h3>
+          <p className="font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
+            {aurora.documental.description}
+          </p>
+          <div className="aspect-video w-full overflow-hidden rounded-lg">
+            <iframe
+              className="h-full w-full"
+              src={aurora.documental.youtubeEmbedUrl}
+              title={`Documental — ${revista.titulo}`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+          <a
+            href={aurora.documental.youtubeUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="self-start font-label-md text-label-md text-primary hover:underline"
+          >
+            Ver en YouTube ›
+          </a>
+        </div>
+      </section>
+
+      {/* Revista integrada */}
+      <section
+        id="revista"
+        className="scroll-mt-24 flex flex-col gap-space-md px-margin pb-space-xl"
+      >
+        <SectionHeader
+          kicker="La Publicación"
+          title={`Revista ${revista.titulo}`}
+          trailing={`${revista.totalPaginas} páginas`}
+        />
+        <MagazineViewer />
+        <button
+          type="button"
+          onClick={() => showToast(revista.pdfMessage)}
+          className="mx-auto flex h-11 w-full max-w-md items-center justify-center rounded-full bg-primary font-label-md text-label-md font-semibold text-on-primary shadow transition-transform hover:bg-on-primary-container active:scale-[0.99]"
+        >
+          Descargar revista (PDF)
+        </button>
+        <div className="flex flex-col gap-0.5 rounded-xl bg-surface-container-low p-space-md font-label-sm text-label-sm text-on-surface-variant">
+          <span>
+            <strong className="font-semibold text-on-surface">Fotografía:</strong>{' '}
+            {revista.creditos[0]?.personas.join(', ')}
+          </span>
+          <span>
+            <strong className="font-semibold text-on-surface">Ilustración:</strong>{' '}
+            {revista.creditos[1]?.personas.join(', ')}
+          </span>
+          <span>
+            <strong className="font-semibold text-on-surface">Investigación, edición:</strong>{' '}
+            {revista.creditos[2]?.personas.join(', ')}
+          </span>
+          <span className="text-outline">{revista.contraportada.detalle}</span>
+        </div>
+      </section>
+
+      {/* Suite musical */}
+      <section id="suite" className="scroll-mt-24 flex flex-col gap-space-md px-margin pb-space-xl">
+        <SectionHeader kicker="Banda Sonora" title="Suite para la Aurora" />
+        <SuitePlayer />
       </section>
 
       {/* Origen del nombre */}
       <article className="flex flex-col gap-space-md px-margin py-space-md">
-        <div className="flex items-center gap-space-xs text-primary">
-          <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider">
-            {aurora.cronica.kicker}
-          </span>
-        </div>
+        <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-primary">
+          {aurora.cronica.kicker}
+        </span>
         <h3 className="font-headline-md text-headline-md leading-tight text-primary">
           {aurora.cronica.title}
         </h3>
@@ -88,6 +180,9 @@ export function AuroraPage() {
       {/* Testimonio real */}
       <section className="px-margin my-space-md">
         <div className="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-lg shadow-sm">
+          <span className="pointer-events-none absolute -bottom-4 -right-2 select-none font-display text-6xl leading-none text-primary/15">
+            ”
+          </span>
           <div className="relative z-10 flex flex-col gap-space-sm">
             <span className="font-label-sm text-label-sm font-semibold uppercase tracking-widest text-primary">
               {aurora.testimonial.kicker}
@@ -114,11 +209,9 @@ export function AuroraPage() {
 
       {/* Acueducto comunitario */}
       <section className="flex flex-col gap-space-md px-margin py-space-sm">
-        <div className="flex items-center gap-space-xs text-primary">
-          <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider">
-            {aurora.acueducto.kicker}
-          </span>
-        </div>
+        <span className="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-primary">
+          {aurora.acueducto.kicker}
+        </span>
         <div className="flex flex-col gap-space-sm rounded-xl bg-tertiary-container p-space-md shadow-sm">
           <div className="flex items-center justify-between">
             <h4 className="font-headline-sm text-headline-sm text-on-tertiary-container">
@@ -177,7 +270,7 @@ export function AuroraPage() {
         </div>
       </section>
 
-      {/* Capítulos de la revista */}
+      {/* Capítulos de la investigación */}
       <section className="flex flex-col gap-space-sm px-margin py-space-md">
         <SectionHeader
           kicker="La Investigación"
@@ -204,13 +297,16 @@ export function AuroraPage() {
                   </span>
                 </div>
               </div>
+              <span aria-hidden="true" className="flex-shrink-0 text-primary">
+                ›
+              </span>
             </Link>
           ))}
         </div>
       </section>
 
       {/* Siguiente cuaderno */}
-      <section className="flex flex-col gap-space-md px-margin pb-space-lg pt-space-md">
+      <section className="px-margin pb-space-lg">
         <Link
           to={aurora.siguiente.href}
           className="flex items-center justify-between gap-space-sm rounded-xl bg-surface-container p-space-md transition-colors hover:bg-surface-container-high"
@@ -226,9 +322,13 @@ export function AuroraPage() {
               {aurora.siguiente.subtitle}
             </span>
           </div>
-          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm"></div>
+          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest text-primary shadow-sm">
+            <span aria-hidden="true">›</span>
+          </div>
         </Link>
       </section>
+
+      <Toast toast={toast} />
     </>
   );
 }
