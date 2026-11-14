@@ -31,8 +31,8 @@ export const proyecto = {
         kicker: 'Revista La Aurora',
         title: 'La publicación completa',
         description: `${revista.totalPaginas} páginas de memoria oral, fotografía e ilustración.`,
-        cta: 'Abrir La Aurora',
-        href: '/la-aurora',
+        cta: 'Abrir la revista',
+        href: '/la-aurora#revista',
         image: {
           src: veredaPaisajeUrl,
           alt: 'Paisaje de cultivos en ladera de El Carmen de Viboral',
