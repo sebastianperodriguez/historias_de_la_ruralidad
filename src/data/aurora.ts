@@ -1,132 +1,72 @@
-export type AuroraFichaStat = {
-  label: string;
-  value: string;
-  note: string;
-};
-
 export type AuroraHito = {
   title: string;
   description: string;
-  accent: 'secondary' | 'primary' | 'surface';
+  accent: 'primary' | 'secondary' | 'tertiary';
 };
 
-export type AuroraFoto = {
-  src: string;
-  alt: string;
-  caption: string;
-  registro: string;
-  coleccion: string;
-};
-
-/*
- * NOTA: las imágenes apuntan temporalmente a los placeholders del
- * prototipo (Stitch). Se reemplazarán por las fotos reales del proyecto
- * en la fase de assets.
- */
 export const aurora = {
   cuaderno: 'Cuaderno de Campo No. 01',
   ficha: 'Ficha Etnográfica',
-  subtitle: 'Memoria oral, cartografía del agua y labranza campesina en las lomas orientales.',
+  subtitle: 'Memorias de una vereda construida en comunidad',
   fichaStats: [
-    { label: 'Altitud', value: '2.150 msnm', note: 'Frío de ladera' },
-    { label: 'Urbano', value: '8.4 km', note: 'Trocha y herradura' },
-    { label: 'Familias', value: '142 predios', note: 'Censo comunitario' },
-  ] satisfies AuroraFichaStat[],
-  ilustracion: {
-    src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBBZX6OGfCcqKrMRxKiNgtzgAg7xBNnEr8pJOaST8bQXkdVBNRzKzA5Z1xg6IuT8HUke5hukakt7-csFPu-Y-1lpAzJdVujJx_23LbZ8gYY0bU9IF8xp4EaZa0g5Kny5bRBs7AX3PZPCtPU7bQn89SRIoc1UsTubVVK4SERyvl4OsaIYnTIUcnw9rUAZtfxh_8ZjJBb7IogFE7S4z29ci8uGS1bdG-m0tGEQYWmiQ',
-    alt: 'Ilustración de las lomas, terrazas de cultivo y familias campesinas de la vereda La Aurora',
-    caption:
-      'Mapeo sensible: Lomas de La Aurora, acequia comunitaria y siembras familiares (Taller 2023)',
-  },
+    { label: 'Entrevistas', value: '4', note: 'Historias orales' },
+    { label: 'Talleres', value: '4', note: 'Con la comunidad' },
+    { label: 'Capítulos', value: '6', note: 'Revista La Aurora' },
+  ],
   cronica: {
-    kicker: 'Crónica Central',
-    title: 'El despertar entre nieblas y el telar de las lomas',
-    lead: 'Antes de que despuntara la primera carretera afirmada, La Aurora existía en el compás lento de las bestias cargadas de alverja, fríjol cargamanto y flores de pompón. Fundada por familias que subieron buscando la bondad térmica de sus 2.150 metros, la vereda aprendió a modelar las pendientes pronunciadas mediante surcos en contorno que retienen la humedad sin erosionar la tierra gredosa.',
+    kicker: 'Origen del nombre',
+    title: 'Una casa azul al borde del camino',
+    lead: 'Parece ser que en el sector Los Alticos, hoy llamado Las Brisas, existió una casa antigua color azul, justo al borde del camino, que sus propietarios adornaron con un llamativo letrero que colgaba de las alfardas del techo: La Aurora, así fue nombrada esta morada que, poco a poco fue haciéndose dueña de la referencia de sus transeúntes y fue nombrando este territorio con un gesto cotidiano.',
     secondary:
-      'Las crónicas orales recogidas con las ancianas de la vereda destacan una trama silenciosa pero férrea: fueron las mujeres quienes fundaron los primeros convites para erigir la escuela de tapia, transportando el barro y amasando el agua traída en calderos desde la quebrada La Peñola.',
-  },
-  audio: {
-    title: 'Relato de Doña Rosalba Ciro',
-    meta: 'Grabación de campo • 03:42 min',
-    chip: 'Archivo Oral',
-    avatarIcon: 'graphic_eq',
-    src: undefined,
-    excerpt:
-      '“Cuando el agua bajó por la primera manguera de polietileno, hicimos sancocho en la quebrada...”',
+      'La vereda comprendía una amplia extensión para la década de los años 60, iniciando desde la zona de los alticos conocida posteriormente como Las Brisas; luego atravesando la quebrada Viboral, la zona central que rodea todo lo que hoy comprende el colegio, seguida de la zona boscosa conocida como El Quemado que limita con el acueducto, hasta llegar a los límites por el norte con la vereda Rivera, por el oriente con la vereda Viboral, por el occidente con la zona urbana de El Carmen de Viboral y por el sur con la vereda Betania.',
   },
   testimonial: {
     kicker: 'Voz Campesina',
     quote:
-      '“Aquí la tierra responde al cariño con que se la labra; cuando llegaron las primeras aguas limpias, supimos que este rincón era para echar raíces.”',
-    name: 'Don Efraín Morales',
-    meta: '78 años • Horticultor y habitante originario',
-    initials: 'EM',
+      '«Para 1985 en la Junta de Acción Comunal, a mí me nombraron como promotora de salud, fuí nombrada por el hospital y seguí trabajando por la vereda de casa en casa haciendo charlas, aplicando inyecciones, haciendo curaciones, atendiendo partos»',
+    name: 'Mariela de Jesús Espinoza',
+    meta: 'Presidenta de la Junta de Acción Comunal de la Vereda La Aurora',
+    initials: 'ME',
   },
-  agua: {
-    kicker: 'Fuentes Hídricas & Ecología Comunitaria',
-    title: 'La Ronda de las Tres Quebradas',
-    chip: 'Acueducto Veredal',
+  acueducto: {
+    kicker: 'El Agua de la Vereda',
+    title: 'Acueducto Aurora Viboral',
+    chip: 'Acueducto Comunitario',
     description:
-      'El abastecimiento de La Aurora proviene de tres vertientes cordilleranas: La Chorrera, El Arrayán y Quebrada Honda. La comunidad gestiona un acueducto veredal autofinanciado con un fondo solidario para la reforestación de alisos nativos y quiebrabarrigos.',
+      'Del primer tanque en la finca de Joaquín Cardona al proyecto de las bocatomas La Linda, Puente Piedra y El Quemado: el agua construida en convites comunitarios de sábados y domingos, hoy protegida con una finca reforestadora en la vereda San Eusebio.',
     stats: [
-      { label: 'Caudal Promedio', value: '18.2 L/segundo' },
-      { label: 'Área Protegida', value: '42 Hectáreas' },
+      { label: 'Bocatomas', value: '3' },
+      { label: 'Casas iniciales', value: '25' },
     ],
   },
-  cartografia: {
-    kicker: 'Cartografía Participativa',
-    trailing: '3 Hitos Georreferenciados',
-    sector: 'Sector El Retiro - La Cuchilla',
-    mapSrc:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuAbnTMFjrnhPfJyulAaw4SKOnNhjlwahkpm6XqsehtGYgcEm4kbZAtniq2xYS3UpVlEVTGu84RvA99Rv6LeK0HyXAaLs8_KYdH7yiIFddY2QeqiUphL9eyQnZYYnx9XC8GXF0rlpym4Wu-P-cNQFhtamrZnEDRpSbQLGb9SLjdnYhtd_F-eA6-XkybYPfOIesqgGKyhdsF9aIKseD5pdeHJpx_Q5dol1p137oIy9w',
-    hitos: [
+  hitos: {
+    kicker: 'Hitos Comunitarios',
+    trailing: '3 Historias Vivas',
+    items: [
       {
-        title: 'La Escuela Vieja de Barro (1954)',
+        title: 'La Junta de Acción Comunal (1972)',
         description:
-          'Lugar del primer convite campesino; hoy punto comunal de acopio de semillas nativas.',
-        accent: 'secondary',
-      },
-      {
-        title: 'Nacimiento La Chorrera',
-        description: 'Punto de reserva forestal comunitaria con sendero vigilado por la JAC.',
+          'Las primeras reuniones se dieron en la casa de José Albino Soto, en Los Alticos, y en 1973 la Junta obtuvo su resolución legal.',
         accent: 'primary',
       },
       {
-        title: 'Cruce Los Morros hacia La Honda',
-        description: 'Antiguo camino de arriería que comunica las dos cuencas campesinas.',
-        accent: 'surface',
+        title: 'La Escuela Rural (1974)',
+        description:
+          'La escritura pública del 9 de julio de 1974 registró el predio comprado a Félix Antonio Arango Ocampo, donado en parte por la familia Espinoza Estrada.',
+        accent: 'secondary',
+      },
+      {
+        title: 'El Acueducto Aurora Viboral',
+        description:
+          'Nació en la finca de Joaquín Cardona y hoy lleva agua a tres centros rurales: Las Brisas, La Aurora y Viboral.',
+        accent: 'tertiary',
       },
     ] satisfies AuroraHito[],
-  },
-  fotos: {
-    kicker: 'Fichas de Archivo Visual',
-    total: 18,
-    collectionMessage: 'La colección visual completa estará disponible próximamente',
-    items: [
-      {
-        src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDL6BtjO_MrXmpII3qQV4lWQMUkPn0FEAGcBaadzM7QEfqw8Uz1mWKNC_enjzmGyr6LhEUbZvuMRwfBYF2HYoAtmpPhmNpz1rs4PGIPpxIHC_ULhEj1Fv5Oh0RbDduhGxbGQi-zQio-KrMaAZUNF1Y10nxrQBgdWFN5_mI4iXqjszIGVF_XPILJT0azgtoXKw1mhLS5YznNeTFyENNTZk-v3T4QcjvX6LiOOB93lg',
-        alt: 'Doña Mercedes con un bol de barro lleno de semillas recién cosechadas frente a la cocina rural',
-        caption: 'Doña Mercedes en la huerta',
-        registro: 'Registro 1974',
-        coleccion: 'Colección Ciro',
-      },
-      {
-        src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYbHEiLZE8ZqPVcA9TXE55e1cW096xAdOWB7m-wO7pQRAk6zZXN6wXB6F_XNb1_2WZKNq-N1rCpNGR98nDTI8wSOhMrCmsKeZHBejid4Nz4iN_WE-7zSIGz-7TiezXetS0LE2GmNH1EKcv__hhv8FWXUB7D3UUslKT5jP9_y1rTo_P-J5QuYZn_4TZjiOzsYq-Y_1h-drw_9YdfJzefD_Zr7pSHVhPl6870hr2SQ',
-        alt: 'Campesinos con mulas de carga en una trocha de ladera rodeada de hortensias',
-        caption: 'Carga de flores en la trocha',
-        registro: 'Registro 1982',
-        coleccion: 'Archivo Comunitario',
-      },
-    ] satisfies AuroraFoto[],
-  },
-  descarga: {
-    label: 'Descargar informe investigativo (PDF)',
-    toast: 'Generando cuaderno investigativo La Aurora (PDF)...',
   },
   siguiente: {
     kicker: 'Siguiente Cuaderno',
     title: 'Vereda La Honda',
-    subtitle: 'Alfarería, arcillas vivas y cañones del río',
+    subtitle: 'Segundo cuaderno de campo — próximamente',
     href: '/la-honda',
   },
 } as const;
